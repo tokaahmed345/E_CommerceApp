@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "841286673346",
+    "project_id": "ecommerce-70953",
+    "storage_bucket": "ecommerce-70953.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841286673346:android:7cf52f1bb5c47f3d73ec5b",
+        "android_client_info": {
+          "package_name": "com.example.lazashopping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "841286673346-tik76vv0icn9jr11plf727qlq06uff0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIuYALgJLPdRu8c_QflaVTW8tLaXW4XdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "841286673346-tik76vv0icn9jr11plf727qlq06uff0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
