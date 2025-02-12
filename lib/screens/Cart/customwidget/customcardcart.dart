@@ -36,7 +36,6 @@ class CustomCardCart extends StatelessWidget {
                 "https://laza.runasp.net/$productImage", // تأكد من مسار الصورة الصحيح
                 width: 80,
                 height: 80,
-                errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
               ),
               SizedBox(width: 10),
               Expanded(

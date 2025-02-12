@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lazashopping/screens/Orders/getallorders.dart';
 import 'package:lazashopping/screens/homepage/homescreen.dart';
 import 'package:lazashopping/screens/wishlist/wishlist.dart';
 
@@ -31,6 +32,9 @@ setState(() {
         }
           if (index == 0) {
           Navigator.pushNamed(context, HomeScreen.id);
+        }
+         if (index == 3) {
+          Navigator.pushNamed(context, GetOrders.id);
         }
 },
 currentIndex: selectedIndex,

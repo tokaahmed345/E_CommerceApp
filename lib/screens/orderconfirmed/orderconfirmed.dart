@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lazashopping/screens/Orders/getallorders.dart';
 import 'package:lazashopping/screens/homepage/homescreen.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lottie/lottie.dart';
@@ -50,18 +51,23 @@ class OrderConfirmedScreen extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  padding: EdgeInsets.all(20),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[3240],
-                      border: Border.all(width: 1, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                      child: Text(
-                    "Go To Orders",
-                    style: TextStyle(color: Colors.grey, fontSize: 20),
-                  )),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, GetOrders.id);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Colors.grey[3240],
+                        border: Border.all(width: 1, color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                        child: Text(
+                      "Go To Orders",
+                      style: TextStyle(color: Colors.grey, fontSize: 20),
+                    )),
+                  ),
                 )
               ],
             ),

@@ -4,6 +4,7 @@ import 'package:lazashopping/firebase_options.dart';
 import 'package:lazashopping/screens/AllReview/reviewsscreen.dart';
 import 'package:lazashopping/screens/Cart/addressscreen.dart';
 import 'package:lazashopping/screens/Cart/cart-screen.dart';
+import 'package:lazashopping/screens/Orders/getallorders.dart';
 import 'package:lazashopping/screens/addreview/add_review_screen.dart';
 import 'package:lazashopping/screens/Category/categoryhome.dart';
 import 'package:lazashopping/screens/Auth/forgetpassword.dart';
@@ -20,6 +21,7 @@ import 'package:lazashopping/screens/splash/splash.dart';
 import 'package:lazashopping/screens/started_screen.dart';
 import 'package:lazashopping/screens/Auth/verification%20_code.dart';
 import 'package:lazashopping/screens/wishlist/wishlist.dart';
+import 'package:lazashopping/services/orders/get_Orders_Services.dart';
 import 'package:lazashopping/sharedpref/sharedprefrance.dart';
 
 void main() async {
@@ -63,7 +65,8 @@ class MyApp extends StatelessWidget {
         PaymentScreen.id: (context) => PaymentScreen(),
         AddNewCard.id: (context) => AddNewCard(),
         OrderConfirmedScreen.id: (context) => OrderConfirmedScreen(),
-        WishListScreen.id: (context) => WishListScreen()
+        WishListScreen.id: (context) => WishListScreen(),
+        GetOrders.id:(context)=>GetOrders()
       },
       initialRoute: SharedPref.getToken()==null?Splash_Screan.id:HomeScreen.id,
     );
