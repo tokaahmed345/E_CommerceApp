@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lazashopping/cubits/cubit/cartcubit/calculate_total_cubit.dart';
 import 'package:lazashopping/cubits/cubit/cartcubit/get_all_item_in_cart_cubit.dart';
-import 'package:lazashopping/cubits/cubit/quantity/quantity_control_cubit.dart';
+import 'package:lazashopping/cubits/cubit/cartcubit/quantity_control_cubit.dart';
 import 'package:lazashopping/services/cartServices/delete_item_by_id.dart';
 class CustomCardCart extends StatelessWidget {
   final String productName;
@@ -65,7 +66,8 @@ class CustomCardCart extends StatelessWidget {
                                     BlocProvider.of<QuantityControlCubit>(
                                             context)
                                         .increaseQuantity();
-                                  },
+                       
+                                  }
                                 ),
                               ),
                             ),
@@ -88,6 +90,9 @@ class CustomCardCart extends StatelessWidget {
                                     BlocProvider.of<QuantityControlCubit>(
                                             context)
                                         .decreaceQuantity();
+ 
+
+
                                   },
                                 ),
                               ),

@@ -4,7 +4,7 @@ import 'package:lazashopping/screens/Category/customwidgets/custombodycard.dart'
 class CustomGridView extends StatelessWidget {
   const CustomGridView({
     super.key,
-    required this.products,
+    required this.products, 
   });
 
   final List<dynamic> products;
@@ -36,7 +36,9 @@ class CustomGridView extends StatelessWidget {
           childAspectRatio: childAspectRatio,
         ),
         itemBuilder: (context, index) {
-          return CustomCardContent(pro: products[index],);
+          return CustomCardContent(
+            
+            pro: products[index],);
         },
       ),
     );

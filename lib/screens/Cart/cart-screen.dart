@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lazashopping/cubits/cubit/cartcubit/calculate_total_cubit.dart';
 import 'package:lazashopping/cubits/cubit/cartcubit/get_all_item_in_cart_cubit.dart';
 import 'package:lazashopping/screens/Cart/addressscreen.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
@@ -13,17 +14,20 @@ import 'package:lazashopping/screens/paymentscreen/payment.dart';
 import 'package:lazashopping/services/cartServices/getallservices.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lottie/lottie.dart';
+
 class CartView extends StatelessWidget {
   const CartView({super.key});
   static String id = 'cart';
 
   @override
   Widget build(BuildContext context) {
-    final Map<String,dynamic> ?controllers =   ModalRoute.of(context)?.settings.arguments as Map<String,dynamic>?;
-    return BlocProvider(
-      create: (context) =>
-          GetAllItemInCartCubit(getAllItemsServices: GetAllItemInCartServices())
-            ..getAllItemsInCart(),
+    final Map<String, dynamic>? controllers =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+     return MultiBlocProvider(
+  providers: [
+    BlocProvider(create: (context) => GetAllItemInCartCubit(getAllItemsServices: GetAllItemInCartServices())..getAllItemsInCart()),
+    BlocProvider(create: (context) => CalculateTotalCubit()), 
+  ],
       child: BlocConsumer<GetAllItemInCartCubit, GetAllItemInCartState>(
         listener: (context, state) {
           if (state is GetAllItemInCartFailure) {
@@ -83,8 +87,9 @@ class CartView extends StatelessWidget {
                               onTap: () {
                                 Navigator.pushNamed(context, AddressScreen.id);
                               },
-                              title: controllers?["address"]??"click to add address",
-                              subTitle:controllers ?["country"]??"",
+                              title: controllers?["address"] ??
+                                  "click to add address",
+                              subTitle: controllers?["country"] ?? "",
                             ),
                             const SizedBox(height: 16),
                             const CustomTitleCard(title: "Payment Methods"),
@@ -98,7 +103,9 @@ class CartView extends StatelessWidget {
                             ),
                             const SizedBox(height: 16),
                             const CustomTitleCard(title: 'Order Info'),
-                             SummaryOrderInfo(items: items,),
+                            SummaryOrderInfo(
+                              items: state.getAllItems["Items"] ?? [],
+                            ),
                             const SizedBox(height: 16),
                           ],
                         );

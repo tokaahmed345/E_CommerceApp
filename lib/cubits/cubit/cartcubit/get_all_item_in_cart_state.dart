@@ -11,6 +11,9 @@ final class GetAllItemInCartSuccess extends GetAllItemInCartState {
 
   GetAllItemInCartSuccess(this.getAllItems);
   
+    
+
+
 }
 final class GetAllItemInCartFailure extends GetAllItemInCartState {final String message;
 

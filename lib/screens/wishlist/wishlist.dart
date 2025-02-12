@@ -46,8 +46,7 @@ class WishListScreen extends StatelessWidget {
                 );
               } else if (snapshot.hasError) {
                 return Text("Error: ${snapshot.error}");
-              } else if (snapshot.connectionState ==
-                  ConnectionState.waiting) {
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               } else {
                 return Center(child: Text("No data available"));

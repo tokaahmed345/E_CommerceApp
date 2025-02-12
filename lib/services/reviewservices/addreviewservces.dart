@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:lazashopping/model/reviewmodel/add_review_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

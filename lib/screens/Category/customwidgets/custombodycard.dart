@@ -1,6 +1,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lazashopping/model/ProductModel/product.dart';
 import 'package:lazashopping/model/WishListModel/getallwishlist.dart';
 import 'package:lazashopping/screens/detailsproduct.dart/info_screen.dart';
 import 'package:lazashopping/services/addwishlist/addwishlist_services.dart';
@@ -14,8 +15,10 @@ class CustomCardContent extends StatefulWidget {
   @override
   State<CustomCardContent> createState() => _CustomCardContentState();
 }
+
 class _CustomCardContentState extends State<CustomCardContent> {
-   bool isFavorite = false;
+  bool isFavorite = false;
+  final String baseUrl = "https://laza.runasp.net/";
 
   @override
   void initState() {
@@ -24,55 +27,59 @@ class _CustomCardContentState extends State<CustomCardContent> {
   }
 
   Future<void> checkIfFavorite() async {
-    try {
-      List<GetAllUserWishList> wishlist =
-          await GetUserWishListServices().getAllWishList() ?? [];
-
-      setState(() {
-        isFavorite =
-            wishlist.any((item) => item.id == widget.pro.id);
-      });
-    } catch (e) {
-      print("❌ Error checking wishlist: $e");
-    }
-  }
-Future<void> toggleWishlist() async {
   try {
-    if (!isFavorite) {
-      // إضافة إلى المفضلة
-      await AddWishlListServices().addWishList(
-        productId: widget.pro.id!,
-        name: widget.pro.name!,
-        img: widget.pro.img!,
-        price: widget.pro.price!,
-      );
+    List<GetAllUserWishList> wishlist =
+        await GetUserWishListServices().getAllWishList() ?? [];
+    
+    if (widget.pro is Product) {
+      bool favorite = wishlist.any((item) => item.id == (widget.pro as Product).id);
       setState(() {
-        isFavorite = true;
-      });
-    } else {
-      // إزالة من المفضلة
-      var removedItems = await RemoveWishlListServices().removeWishList(
-        productId: widget.pro.id!,
-        name: widget.pro.name!,
-        img: widget.pro.img!,
-        price: widget.pro.price!,
-      );
-      print("Removed Wishlist Items successfully");
-
-      setState(() {
-        isFavorite = false;
+        isFavorite = favorite;
       });
     }
   } catch (e) {
-    print("❌ Error: $e");
+    print("❌ Error checking wishlist: $e");
   }
 }
+
+Future<void> toggleWishlist() async {
+  try {
+    if (widget.pro is Product) {
+      Product product = widget.pro as Product;
+
+      if (!isFavorite) {
+        await AddWishlListServices().addWishList(
+          productId: product.id!,
+          name: product.name!,
+          img: product.img!,
+          price: product.price!,
+        );
+      } else {
+        await RemoveWishlListServices().removeWishList(
+          productId: product.id!,
+          name: product.name!,
+          img: product.img!,
+          price: product.price!,
+        );
+      }
+
+      setState(() {
+        isFavorite = !isFavorite;
+      });
+    }
+  } catch (e) {
+    setState(() {
+      isFavorite = !isFavorite; // إرجاع الحالة الأصلية في حالة الخطأ
+    });
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    const String baseUrl = "https://laza.runasp.net/";
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -90,7 +97,10 @@ Future<void> toggleWishlist() async {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: CachedNetworkImage(
-                    imageUrl: "$baseUrl${widget.pro.img}",
+                    imageUrl: widget.pro is Product?
+                    
+                    
+                    "$baseUrl${(widget.pro as Product).img }":"",
                     width: screenWidth * 0.45,
                     height: screenHeight * 0.25,
                     fit: BoxFit.cover,

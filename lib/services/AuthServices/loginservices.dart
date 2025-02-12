@@ -1,6 +1,5 @@
 
 import 'package:dio/dio.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:lazashopping/model/AuthModel/login.dart';
 
 class LoginServices 
