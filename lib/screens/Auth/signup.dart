@@ -6,6 +6,7 @@ import 'package:lazashopping/cubits/cubit/register-cubit/registration_cubit.dart
 import 'package:lazashopping/model/AuthModel/login.dart';
 import 'package:lazashopping/screens/Auth/login.dart';
 import 'package:lazashopping/services/AuthServices/register.dart';
+import 'package:lazashopping/sharedpref/sharedprefrance.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customtextfield.dart';
 
@@ -33,7 +34,9 @@ class _Sign_UpState extends State<Sign_Up> {
       child: BlocConsumer<RegistrationCubit, RegistrationState>(
         listener: (context, state) {
           if (state is RegistrationSuccess) {
-            print(state.register.message);
+         SharedPref.saveUsername(UserNameController.text);
+                     print(state.register.message);
+
             Navigator.pushNamed(context, LoginScreen.id);
           } else if (state is RegistrationFailure) {
             ScaffoldMessenger.of(context)

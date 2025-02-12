@@ -9,15 +9,15 @@ final String title;
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color(0xffEDE9FE),
+  backgroundColor:  Theme.of(context).appBarTheme.backgroundColor,
       elevation: 0,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+        icon: Icon(Icons.arrow_back_ios, color: Theme.of(context).appBarTheme.iconTheme!.color),
         onPressed: () {
           Navigator.of(context).pop();
         },
       ),
-      title: Text(title, style: TextStyle(color: Colors.black)),
+      title: Text(title, style: TextStyle(color: Theme.of(context).appBarTheme.iconTheme!.color)),
       centerTitle: true,
     );
   

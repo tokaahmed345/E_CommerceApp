@@ -25,7 +25,8 @@ class _InfoCardState extends State<InfoCard> {
     }
 
     return Scaffold(
-        backgroundColor: Color(0xffEDE9FE),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
         body: FutureBuilder<ItemInfo?>(
             future: getData(),
             builder: (context, snapshot) {

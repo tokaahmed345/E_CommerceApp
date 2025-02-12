@@ -16,7 +16,8 @@ final  void Function()? onTap;
     return InkWell(
       onTap: onTap,
       child: Card(
-        color: Color(0xffEDE9FE),
+        color: Theme.of(context).scaffoldBackgroundColor,
+
         child: ListTile(
           leading: Icon(Icons.location_on, color: Colors.orange),
           title: Text(title),

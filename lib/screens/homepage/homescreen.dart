@@ -19,7 +19,9 @@ class HomeScreen extends StatelessWidget {
     ProductServces pro = ProductServces();
     return Scaffold(
       key: globalKey,
-      backgroundColor: Color(0xffEDE9FE),
+      // backgroundColor: Color(0xffEDE9FE),
+  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 45.0, horizontal: 10),
         child: Column(

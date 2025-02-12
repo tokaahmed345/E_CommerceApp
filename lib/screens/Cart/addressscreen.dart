@@ -9,8 +9,9 @@ static String id="adressscreen";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
       resizeToAvoidBottomInset: false,
-      backgroundColor:Color(0xffEDE9FE) ,
 appBar: CustomAppBar(title: "Adress"),
 body: CustomColumnAdreesBody(),
     );

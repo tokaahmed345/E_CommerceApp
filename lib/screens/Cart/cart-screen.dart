@@ -41,7 +41,8 @@ class CartView extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: const Color(0xffEDE9FE),
+  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
             appBar: const CustomAppBar(title: "Cart"),
             body: Column(
               children: [

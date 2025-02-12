@@ -18,7 +18,9 @@ class CustomListtileCard extends StatelessWidget {
       onTap: onTap,
 
       child: Card(
-        color: Color(0xffEDE9FE),
+        // color: Color(0xffEDE9FE),
+    color: Theme.of(context).scaffoldBackgroundColor,
+
         child: ListTile(
           leading: Image.asset(image, width: 50),
           title: Text(title),

@@ -15,4 +15,12 @@ class SharedPref {
   static Future<void> removeToken() async {
     await prefs.remove('token');
   }
+ static Future<void> saveUsername(String username) async {
+  await prefs.setString('username', username);
+}
+static Future<String>getUserName()async{
+    String? username = prefs.getString("username");
+  print("Retrieved Username: $username"); // للتحقق من القيمة المخزنة
+  return username ?? "Guest";
+}
 }

@@ -18,7 +18,8 @@ class SummaryOrderInfo extends StatelessWidget {
         builder: (context, state) {
           if(state is CalculateTotalSuccess){
              return Card(
-            color: Color(0xffEDE9FE),
+            color:   Theme.of(context).scaffoldBackgroundColor,
+
             child: Padding(
               padding: EdgeInsets.all(12),
               child: Column(
