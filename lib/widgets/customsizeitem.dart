@@ -12,7 +12,7 @@ final String text;
       width: 80,
       height: 90,
       child: Card(
-        color: Color.fromARGB(255, 230, 226, 243),
+        color: Theme.of(context).cardColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child:
       Center(child: Text(text,style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),))),

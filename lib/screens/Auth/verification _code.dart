@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazashopping/cubits/cubit/verfication-cubit/verfication_cubit.dart';
 import 'package:lazashopping/screens/Auth/newpassword.dart';
 import 'package:lazashopping/services/AuthServices/verficationservices.dart';
+import 'package:lazashopping/widgets/customappbar.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 
 class Verification_Code extends StatefulWidget {
@@ -78,22 +79,8 @@ nodes.dispose();
         builder: (context, state) {
           return Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: const Color(0xffEDE9FE),
-            appBar: AppBar(
-              backgroundColor: const Color(0xffEDE9FE),
-              elevation: 0,
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundColor: const Color(0xffEDE9FE),
-                foregroundColor: Colors.black,
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(Icons.arrow_back, size: 30),
-                ),
-              ),
-            ),
+            backgroundColor:Theme.of(context).scaffoldBackgroundColor,
+            appBar:CustomAppbar(title: ""),
             body: Form(
               key: key,
               child: Column(

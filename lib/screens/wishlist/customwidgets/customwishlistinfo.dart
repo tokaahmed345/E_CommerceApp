@@ -26,13 +26,7 @@ class CustomInfoWishlist extends StatelessWidget {
          ]  ),
        ),
            
-           Container(
-    padding: EdgeInsets.all(20),
-     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-     child: Row(children: [Padding(
-       padding: const EdgeInsets.only(right: 8.0),
-       child: Icon(Icons.edit,size: 20,),
-     ),Text("Edit",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)],),),
+          
             
     ],);
   }

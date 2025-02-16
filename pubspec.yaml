@@ -78,6 +78,8 @@ flutter:
     - assets/images/undraw_order_confirmed_aaw7 1 (1).png
     - assets/images/Animation - 1739207738917.json
     - assets/images/Animation - 1739216535748.json
+    - assets/images/Animation - 1739721795829.json
+    - assets/images/Animation - 1739722032281.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see

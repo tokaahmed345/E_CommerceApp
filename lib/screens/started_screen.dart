@@ -3,9 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
 import 'package:lazashopping/screens/Homepage/homescreen.dart';
 import 'package:lazashopping/screens/Auth/login.dart';
 import 'package:lazashopping/screens/Auth/signup.dart';
+import 'package:lazashopping/widgets/customappbar.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customrectanglebutton.dart';
 
@@ -43,23 +45,9 @@ class StartedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffEDE9FE),
-      appBar: AppBar(
-        backgroundColor: Color(0xffEDE9FE),
-        elevation: 0,
-        leading: CircleAvatar(
-            radius: 30,
-            backgroundColor: Color(0xffEDE9FE),
-            foregroundColor: Colors.black,
-            child: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  size: 30,
-                ))),
-      ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: CustomAppbar(title: "",),
+      
       body: Column(
         children: [
           Center(
@@ -68,7 +56,7 @@ class StartedScreen extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
           )),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 160.0),
+            padding: const EdgeInsets.symmetric(vertical: 150.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -124,7 +112,7 @@ class StartedScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.grey, fontSize: 20)),
                 TextSpan(
                     text: "LOGIN",
-                    style: TextStyle(color: Colors.black, fontSize: 20))
+                    style: TextStyle(color: Theme.of(context).appBarTheme.titleTextStyle!.color, fontSize: 20))
               ])),
             ),
           ),

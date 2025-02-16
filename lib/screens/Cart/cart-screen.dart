@@ -60,17 +60,20 @@ class CartView extends StatelessWidget {
                         List<dynamic> items = state.getAllItems["Items"] ?? [];
                         if (items.isEmpty) {
                           return Center(
-                              child: Column(children: [
-                            Lottie.asset(
-                                "assets/images/Animation - 1739207738917.json"),
-                            Text(
-                              "Cart Is Empty ",
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  color:
-                                      const Color.fromARGB(255, 133, 39, 176)),
-                            )
-                          ]));
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 70.0),
+                                child: Column(children: [
+                                                            Lottie.asset(
+                                  "assets/images/Animation - 1739721795829.json"),
+                                                            Text(
+                                "Cart Is Empty ",
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    color:
+                                        const Color.fromARGB(255, 133, 39, 176)),
+                                                            )
+                                                          ]),
+                              ));
                         }
                         return ListView(
                           padding: const EdgeInsets.all(16),

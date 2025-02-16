@@ -5,6 +5,7 @@ import 'package:lazashopping/cubits/cubit/login-cubit/login_cubit.dart';
 import 'package:lazashopping/screens/Auth/forgetpassword.dart';
 import 'package:lazashopping/screens/Homepage/homescreen.dart';
 import 'package:lazashopping/services/AuthServices/loginservices.dart';
+import 'package:lazashopping/widgets/customappbar.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customtextfield.dart';
 
@@ -45,8 +46,10 @@ class _LoginScreenState extends State<LoginScreen> {
         builder: (context, state) {
           return Scaffold(
                         resizeToAvoidBottomInset: false,
+appBar: CustomAppbar(title:""),
 
-            backgroundColor: Color(0xffEDE9FE),
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+         
             body: SafeArea(
               child: Form(
                 key: globalKey,
@@ -55,15 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    // Login Text
-                    IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.arrow_back)),
+                  
                     Center(
                         child: Text(
                       "LOGIN",
@@ -202,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Text(
                             "Remember me",
-                            style: TextStyle(color: Colors.black, fontSize: 20),
+                            style: TextStyle(color: Theme.of(context).appBarTheme.titleTextStyle!.color, fontSize: 20),
                           ),
                           Switch(
                               activeColor: Colors.green,

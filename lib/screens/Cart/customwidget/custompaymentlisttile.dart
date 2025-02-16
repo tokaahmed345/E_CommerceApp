@@ -19,7 +19,7 @@ class CustomListtileCard extends StatelessWidget {
 
       child: Card(
         // color: Color(0xffEDE9FE),
-    color: Theme.of(context).scaffoldBackgroundColor,
+    color: Theme.of(context).cardColor,
 
         child: ListTile(
           leading: Image.asset(image, width: 50),

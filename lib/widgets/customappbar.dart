@@ -9,18 +9,18 @@ final String title;
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color(0xffEDE9FE),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       elevation: 0,
       leading: CircleAvatar(
           radius: 30,
-          backgroundColor: Color(0xffEDE9FE),
-          foregroundColor: Colors.black,
+          backgroundColor: Theme.of(context).cardColor,
+          foregroundColor:Theme.of(context).appBarTheme.foregroundColor,
           child: IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
               icon: Icon(
-                Icons.arrow_back,
+                Icons.arrow_back_ios,
                 size: 30,
               ))),
     );

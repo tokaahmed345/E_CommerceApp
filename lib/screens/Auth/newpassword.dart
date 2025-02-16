@@ -4,6 +4,7 @@ import 'package:lazashopping/cubits/cubit/update-cubit/update_password_cubit.dar
 import 'package:lazashopping/screens/Auth/login.dart';
 
 import 'package:lazashopping/services/AuthServices/updateservices.dart';
+import 'package:lazashopping/widgets/customappbar.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customtextfield.dart';
 
@@ -43,22 +44,8 @@ class _NewPassword_ScreanState extends State<NewPassword_Screan> {
           return Scaffold(
                         resizeToAvoidBottomInset: false,
 
-            backgroundColor: Color(0xffEDE9FE),
-            appBar: AppBar(
-              backgroundColor: Color(0xffEDE9FE),
-              elevation: 0,
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundColor: Color(0xffEDE9FE),
-                foregroundColor: Colors.black,
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(Icons.arrow_back, size: 30),
-                ),
-              ),
-            ),
+            backgroundColor:Theme.of(context).scaffoldBackgroundColor,
+            appBar: CustomAppbar(title: ""),
             body: Form(
               key: globalKey,
               child: Column(

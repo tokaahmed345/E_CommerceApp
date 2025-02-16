@@ -7,6 +7,7 @@ import 'package:lazashopping/model/AuthModel/login.dart';
 import 'package:lazashopping/screens/Auth/login.dart';
 import 'package:lazashopping/services/AuthServices/register.dart';
 import 'package:lazashopping/sharedpref/sharedprefrance.dart';
+import 'package:lazashopping/widgets/customappbar.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customtextfield.dart';
 
@@ -48,8 +49,8 @@ class _Sign_UpState extends State<Sign_Up> {
         builder: (context, state) {
           return Scaffold(
                         resizeToAvoidBottomInset: false,
-
-            backgroundColor: Color(0xffEDE9FE),
+appBar: CustomAppbar(title:""),
+            backgroundColor:Theme.of(context).scaffoldBackgroundColor,
             body: Form(
               key: globalKey,
               child: Column(
@@ -59,15 +60,7 @@ class _Sign_UpState extends State<Sign_Up> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: 30,
-                        ),
-                        // Login Text
-                        IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: Icon(Icons.arrow_back)),
+                    
                         Center(
                             child: Text(
                           "Sign_Up",
@@ -197,7 +190,7 @@ class _Sign_UpState extends State<Sign_Up> {
                             children: [
                               Text(
                                 "Remember me",
-                                style: TextStyle(color: Colors.black, fontSize: 20),
+                                style: TextStyle(color: Theme.of(context).appBarTheme.titleTextStyle!.color, fontSize: 20),
                               ),
                               Switch(
                                   activeColor: Colors.green,

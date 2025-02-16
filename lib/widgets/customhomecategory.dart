@@ -17,7 +17,7 @@ final String id;
      width: 150,
      child: Card(
       elevation: 6,
-       color: Color(0xfff5f6fa),
+       color:  Theme.of(context).cardColor,
        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
        child: Padding(
          padding: const EdgeInsets.all(10.0),

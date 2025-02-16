@@ -13,7 +13,7 @@ class GetOrders extends StatelessWidget {
 
     return Scaffold(
       appBar: const CustomAppBar(title: "Orders"),
-      backgroundColor: Color(0xffEDE9FE),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
           Expanded(
@@ -32,7 +32,7 @@ class GetOrders extends StatelessWidget {
                           final order = orders[index];
 
                           return Card(
-                              color: Color(0xffEDE9FE),
+                              color: Theme.of(context).cardColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15)),
                               elevation: 5,

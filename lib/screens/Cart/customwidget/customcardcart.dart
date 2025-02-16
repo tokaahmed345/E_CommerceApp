@@ -25,7 +25,7 @@ class CustomCardCart extends StatelessWidget {
     return BlocProvider(
       create: (context) => QuantityControlCubit(),
       child: Card(
-        color:   Theme.of(context).scaffoldBackgroundColor,
+        color:   Theme.of(context).cardColor,
 
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 5,
@@ -58,7 +58,7 @@ class CustomCardCart extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(25),
                               ),
                               child: CircleAvatar(
-                             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                             backgroundColor: Theme.of(context).cardColor,
 
                                 child: IconButton(
                                   icon: Icon(Icons.keyboard_arrow_up,
@@ -83,7 +83,7 @@ class CustomCardCart extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(25),
                               ),
                               child: CircleAvatar(
-                             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                             backgroundColor: Theme.of(context).cardColor,
                                 child: IconButton(
                                   icon: Icon(Icons.keyboard_arrow_down,
                                       color: Colors.grey),

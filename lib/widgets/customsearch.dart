@@ -23,17 +23,19 @@ class CustomSearch extends StatelessWidget {
           children: [
             Expanded(
               child: TextField(
+                
                 onTap: () {
                                   showSearch(context: context,delegate:SearchScrean(searchServces:searchServces ));
  
                                 },                controller: controller,
                 autofocus: false,
                 decoration: InputDecoration(
+                  
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10)),
                   hintText: "Search..",
-                  fillColor: Colors.grey.shade100,
+                  fillColor: Theme.of(context).scaffoldBackgroundColor,
                   filled: true,
         
         

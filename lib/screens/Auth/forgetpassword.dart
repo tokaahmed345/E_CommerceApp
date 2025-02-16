@@ -45,7 +45,7 @@ print(state.message);
           return Scaffold(
                         resizeToAvoidBottomInset: false,
           
-            backgroundColor: Color(0xffEDE9FE),
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: const CustomAppbar(title: "",),
             body: Form(
               key: formKey,

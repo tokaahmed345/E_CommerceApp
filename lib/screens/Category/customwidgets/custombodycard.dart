@@ -91,6 +91,7 @@ Future<void> toggleWishlist() async {
                     arguments: widget.pro);
               },
               child: Card(
+                
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),

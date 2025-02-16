@@ -6,6 +6,7 @@ import 'package:lazashopping/screens/homepage/customwidget/custombottomnavigatio
 import 'package:lazashopping/screens/wishlist/customwidgets/customtitlerow.dart';
 import 'package:lazashopping/screens/wishlist/customwidgets/customwishlistinfo.dart';
 import 'package:lazashopping/services/getallwishlist/getalluserwishlist.dart';
+import 'package:lottie/lottie.dart';
 
 class WishListScreen extends StatelessWidget {
   const WishListScreen({super.key});
@@ -17,7 +18,7 @@ class WishListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffEDE9FE),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
           CustomWishListTitleRow(),
@@ -45,7 +46,13 @@ class WishListScreen extends StatelessWidget {
                   ],
                 );
               } else if (snapshot.hasError) {
-                return Text("Error: ${snapshot.error}");
+                return Column(
+                  children: [
+                    Lottie.asset("assets/images/Animation - 1739722032281.json"),
+                    Center(child: Text(" WishList Empty",style: TextStyle(fontSize: 22,color: const Color.fromARGB(255, 133, 39, 176)),
+)),
+                  ],
+                );
               } else if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               } else {
