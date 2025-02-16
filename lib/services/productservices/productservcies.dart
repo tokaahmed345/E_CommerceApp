@@ -60,10 +60,9 @@ return result;
     if (response.statusCode! >= 200 && response.statusCode! < 300) {
       if (response.data != null && response.data.isNotEmpty) {
         List<dynamic> jsonData = response.data;
-        print("WWWWWWW");
         print(jsonData);
-        List<Product> searchModel = jsonData.map((item) => Product.fromJson(item)).toList();
-        return searchModel;
+        List<Product> productModel = jsonData.map((item) => Product.fromJson(item)).toList();
+        return productModel;
 } else {
         throw Exception("Empty response body");
       }

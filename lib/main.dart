@@ -23,7 +23,6 @@ import 'package:lazashopping/screens/splash/splash.dart';
 import 'package:lazashopping/screens/started_screen.dart';
 import 'package:lazashopping/screens/Auth/verification%20_code.dart';
 import 'package:lazashopping/screens/wishlist/wishlist.dart';
-import 'package:lazashopping/services/orders/get_Orders_Services.dart';
 import 'package:lazashopping/sharedpref/sharedprefrance.dart';
 
 void main() async {
@@ -91,7 +90,8 @@ class MyApp extends StatelessWidget {
                 GetOrders.id: (context) => GetOrders()
               },
               initialRoute:
-                  SharedPref.getToken() == null ? Splash_Screan.id : HomeScreen.id,
+                //  Splash_Screan.id
+                   SharedPref.getToken() == null ? Splash_Screan.id : HomeScreen.id,
             );
         },
       ),
