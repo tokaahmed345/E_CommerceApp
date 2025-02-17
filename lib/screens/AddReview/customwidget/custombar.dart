@@ -13,7 +13,7 @@ final double number;
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
       CircleAvatar(
-              radius: 30,
+              radius: 22,
               backgroundColor: Color(0xffEDE9FE),
               foregroundColor: Colors.black,
               child: IconButton(
@@ -21,8 +21,8 @@ final double number;
                     Navigator.of(context).pop();
                   },
                   icon: Icon(
-                    Icons.arrow_back,
-                    size: 30,
+                    Icons.arrow_back_ios,
+                    size: 25,
                   ))),
       Padding(
         padding: EdgeInsets.only(right: number),

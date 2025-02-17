@@ -15,13 +15,13 @@ class CategoryHome extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).cardColor,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
             icon: Icon(Icons.arrow_back_ios,
-                color: Theme.of(context).appBarTheme.foregroundColor)),
+                color: Theme.of(context).appBarTheme.iconTheme!.color)),
         elevation: 0,
       ),
       body: Padding(

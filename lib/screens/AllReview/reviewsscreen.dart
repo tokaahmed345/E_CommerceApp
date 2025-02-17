@@ -18,7 +18,7 @@ class ReviewsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => AllReviewCubit(reviewServices)..fetchData(productId),
       child: Scaffold(
-        backgroundColor: Color(0xffEDE9FE),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Column(
           children: [
             Padding(

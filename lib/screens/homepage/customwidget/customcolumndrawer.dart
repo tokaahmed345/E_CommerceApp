@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazashopping/cubits/cubit/Theme/theme_cubit_cubit.dart';
-import 'package:lazashopping/model/AuthModel/register.dart';
-import 'package:lazashopping/model/ProductDetails/iteminfo.dart';
-import 'package:lazashopping/screens/Auth/signup.dart';
-import 'package:lazashopping/screens/Orders/getallorders.dart';
-import 'package:lazashopping/services/orders/get_Orders_Services.dart';
+import 'package:lazashopping/screens/Auth/login.dart';
+import 'package:lazashopping/screens/drawersScreens/account_Info.dart';
+import 'package:lazashopping/screens/drawersScreens/display_Password.dart';
+import 'package:lazashopping/screens/wishlist/wishlist.dart';
 import 'package:lazashopping/sharedpref/sharedprefrance.dart';
 import 'package:lazashopping/widgets/customdraweritem.dart';
 
@@ -81,7 +80,7 @@ class CustomColumnDrawer extends StatelessWidget {
               ],
             ),
             Card(
-              color: const Color.fromARGB(255, 245, 243, 243),
+              color: Theme.of(context).cardColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
               child: Padding(
@@ -114,13 +113,19 @@ BlocProvider.of<ThemeCubit>(context).toggle();
             ),
           ],
         ),
-        CustomItemInDrawer(text: "Account Information", icon: Icons.info_outline),
-        CustomItemInDrawer(text: "Password", icon: Icons.lock_outline),
-        CustomItemInDrawer(text: "My Card", icon: Icons.credit_card),
-        CustomItemInDrawer(text: "Wishlist", icon: Icons.favorite_outline),
+        CustomItemInDrawer(text: "Account Information", icon: Icons.info_outline,onTap: (){Navigator.pushNamed(context,AccountInfoScreen.id );},),
+        CustomItemInDrawer(text: "Password", icon: Icons.lock_outline,onTap: (){Navigator.pushNamed(context, DisplayPasswordScreen.id);},),
+        // CustomItemInDrawer(text: "My Card", icon: Icons.credit_card),
+        CustomItemInDrawer(text: "Wishlist", icon: Icons.favorite_outline,onTap: (){Navigator.pushNamed(context, WishListScreen.id);},),
         CustomItemInDrawer(text: "Settings", icon: Icons.settings_outlined),
         Spacer(),
-        CustomItemInDrawer(text: "Log Out", icon: Icons.logout),
+        CustomItemInDrawer(text: "Log Out", icon: Icons.logout,color: Colors.red,onTap: ()async{
+      await    SharedPref.removeToken();
+      print("logout");
+      print(SharedPref.getToken());
+      Navigator.pushNamed(context, LoginScreen.id);
+        },),
+SizedBox(height: 20,)
       ],
     );
   }

@@ -15,6 +15,8 @@ import 'package:lazashopping/screens/Homepage/homescreen.dart';
 import 'package:lazashopping/screens/detailsproduct.dart/info_screen.dart';
 import 'package:lazashopping/screens/Auth/login.dart';
 import 'package:lazashopping/screens/Auth/signup.dart';
+import 'package:lazashopping/screens/drawersScreens/account_Info.dart';
+import 'package:lazashopping/screens/drawersScreens/display_Password.dart';
 import 'package:lazashopping/screens/orderconfirmed/orderconfirmed.dart';
 import 'package:lazashopping/screens/paymentscreen/addnewcard.dart';
 import 'package:lazashopping/screens/paymentscreen/payment.dart';
@@ -52,7 +54,7 @@ class MyApp extends StatelessWidget {
               StartedScreen.id: (context) => StartedScreen(),
               Sign_Up.id: (context) => Sign_Up(),
               ForgotPassword.id: (context) => ForgotPassword(),
-              Verification_Code.id: (context) => Verification_Code(),
+              VerificationCode.id: (context) => VerificationCode(),
               NewPassword_Screan.id: (context) => NewPassword_Screan(),
               HomeScreen.id: (context) => HomeScreen(),
               InfoCard.id: (context) => InfoCard(),
@@ -66,13 +68,15 @@ class MyApp extends StatelessWidget {
               AddNewCard.id: (context) => AddNewCard(),
               OrderConfirmedScreen.id: (context) => OrderConfirmedScreen(),
               WishListScreen.id: (context) => WishListScreen(),
-              GetOrders.id: (context) => GetOrders()
+              GetOrders.id: (context) => GetOrders(),
+              DisplayPasswordScreen.id:(context)=>DisplayPasswordScreen(),
+              AccountInfoScreen.id:(context)=>AccountInfoScreen()
             },
             initialRoute:
-                  Splash_Screan.id
-                // SharedPref.getToken() == null
-                //     ? Splash_Screan.id
-                //     : HomeScreen.id,
+                  // Splash_Screan.id
+                SharedPref.getToken() == null
+                    ? Splash_Screan.id
+                    : HomeScreen.id,
           );
         },
       ),

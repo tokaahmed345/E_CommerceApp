@@ -17,7 +17,7 @@ final String title;
           Navigator.of(context).pop();
         },
       ),
-      title: Text(title, style: TextStyle(color: Theme.of(context).appBarTheme.iconTheme!.color)),
+      title: Text(title, style: TextStyle(fontSize: 22,color: Theme.of(context).appBarTheme.iconTheme!.color)),
       centerTitle: true,
     );
   

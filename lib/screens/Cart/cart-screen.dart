@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazashopping/cubits/cubit/cartcubit/calculate_total_cubit.dart';
 import 'package:lazashopping/cubits/cubit/cartcubit/get_all_item_in_cart_cubit.dart';
+import 'package:lazashopping/model/CartModel/getallitemincart.dart';
 import 'package:lazashopping/screens/Cart/addressscreen.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customaddresssection.dart';
@@ -23,11 +24,14 @@ class CartView extends StatelessWidget {
   Widget build(BuildContext context) {
     final Map<String, dynamic>? controllers =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-     return MultiBlocProvider(
-  providers: [
-    BlocProvider(create: (context) => GetAllItemInCartCubit(getAllItemsServices: GetAllItemInCartServices())..getAllItemsInCart()),
-    BlocProvider(create: (context) => CalculateTotalCubit()), 
-  ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => GetAllItemInCartCubit(
+                getAllItemsServices: GetAllItemInCartServices())
+              ..getAllItemsInCart()),
+        BlocProvider(create: (context) => CalculateTotalCubit()),
+      ],
       child: BlocConsumer<GetAllItemInCartCubit, GetAllItemInCartState>(
         listener: (context, state) {
           if (state is GetAllItemInCartFailure) {
@@ -41,8 +45,7 @@ class CartView extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: const CustomAppBar(title: "Cart"),
             body: Column(
               children: [
@@ -61,19 +64,19 @@ class CartView extends StatelessWidget {
                         if (items.isEmpty) {
                           return Center(
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 70.0),
-                                child: Column(children: [
-                                                            Lottie.asset(
+                            padding: const EdgeInsets.symmetric(vertical: 70.0),
+                            child: Column(children: [
+                              Lottie.asset(
                                   "assets/images/Animation - 1739721795829.json"),
-                                                            Text(
+                              Text(
                                 "Cart Is Empty ",
                                 style: TextStyle(
                                     fontSize: 30,
-                                    color:
-                                        const Color.fromARGB(255, 133, 39, 176)),
-                                                            )
-                                                          ]),
-                              ));
+                                    color: const Color.fromARGB(
+                                        255, 133, 39, 176)),
+                              )
+                            ]),
+                          ));
                         }
                         return ListView(
                           padding: const EdgeInsets.all(16),
@@ -123,7 +126,20 @@ class CartView extends StatelessWidget {
                 CustomContainer(
                   text: "Checkout",
                   onTap: () {
-                    Navigator.pushNamed(context, OrderConfirmedScreen.id);
+                    final currentState =
+                        BlocProvider.of<GetAllItemInCartCubit>(context).state;
+
+                    if (currentState is GetAllItemInCartSuccess &&
+                        currentState.getAllItems["Items"] != null &&
+                        currentState.getAllItems["Items"].isNotEmpty) {
+                      Navigator.pushNamed(context, OrderConfirmedScreen.id);
+                    } else {
+                      
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      
+                      SnackBar(
+                        duration: Duration(seconds: 1),
+                        backgroundColor: const Color.fromARGB(255, 231, 85, 209),content: Text("No items in cart",style: TextStyle(fontSize: 22),),));}
                   },
                 ),
               ],

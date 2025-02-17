@@ -9,6 +9,7 @@ import 'package:lazashopping/services/cartServices/getallservices.dart';
 
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customstackitem.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class CustomColumninfoCard extends StatelessWidget {
   const CustomColumninfoCard({

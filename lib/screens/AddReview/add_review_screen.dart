@@ -43,7 +43,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: Color(0xffEDE9FE),
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             body: Column(
               children: [
                 Padding(
@@ -53,6 +53,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Custombar(title: "Add Review", number: 80),
+                    SizedBox(height: 25,),
                       Text(
                         "Name",
                         style: TextStyle(
