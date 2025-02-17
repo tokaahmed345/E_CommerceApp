@@ -7,8 +7,17 @@ import 'package:lottie/lottie.dart';
 class OrderConfirmedScreen extends StatelessWidget {
   const OrderConfirmedScreen({super.key});
   static String id = 'orderconfirmed';
+
   @override
   Widget build(BuildContext context) {
+    // Get screen width and height for responsive design
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double fontSizeTitle = screenWidth * 0.08; // Title font size
+    double fontSizeSubTitle = screenWidth * 0.05; // Subtitle font size
+    double containerPadding = screenWidth * 0.05; // Padding for containers
+    double textPadding = screenWidth * 0.04; // Padding for text elements
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -27,38 +36,41 @@ class OrderConfirmedScreen extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: containerPadding),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Lottie.asset("assets/images/Animation - 1739216535748.json"),
+                // Lottie Animation
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
+                  child: Lottie.asset("assets/images/Animation - 1739216535748.json"),
+                ),
                 SizedBox(
-                  height: 50,
+                  height: screenHeight * 0.05,
                 ),
                 Text(
                   "Order Confirmed!",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSizeTitle),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: screenHeight * 0.01,
                 ),
-                Center(
-                    child: Text(
+                Text(
                   "Your order has been confirmed, we will send you confirmation email shortly.",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: fontSizeSubTitle,
                       color: Colors.grey[400]),
-                )),
+                ),
                 SizedBox(
-                  height: 20,
+                  height: screenHeight * 0.02,
                 ),
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, GetOrders.id);
                   },
                   child: Container(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(containerPadding),
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color: Colors.grey[3240],
@@ -67,20 +79,21 @@ class OrderConfirmedScreen extends StatelessWidget {
                     child: Center(
                         child: Text(
                       "Go To Orders",
-                      style: TextStyle(color: Colors.grey, fontSize: 20),
+                      style: TextStyle(color: Colors.grey, fontSize: screenWidth * 0.05),
                     )),
                   ),
-                )
+                ),
+               
               ],
             ),
           ),
-          Spacer(),
-          CustomContainer(
-            text: "Continue Shopping",
-            onTap: () {
-              Navigator.pushNamed(context, HomeScreen.id);
-            },
-          )
+         Spacer(),
+                CustomContainer(
+                  text: "Continue Shopping",
+                  onTap: () {
+                    Navigator.pushNamed(context, HomeScreen.id);
+                  },
+                )
         ],
       ),
     );

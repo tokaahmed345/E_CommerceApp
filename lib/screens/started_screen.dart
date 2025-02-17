@@ -53,9 +53,12 @@ class _StartedScreenState extends State<StartedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen width for responsive design
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isSmallScreen = screenWidth < 600;
+
     return ModalProgressHUD(
       inAsyncCall: isLoading,
-    
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: CustomAppBar(
@@ -64,12 +67,18 @@ class _StartedScreenState extends State<StartedScreen> {
         body: Column(
           children: [
             Center(
-                child: Text(
-              "Let's Get Started",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-            )),
+              child: Text(
+                "Let's Get Started",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: isSmallScreen ? 30 : 40,
+                ),
+              ),
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 180.0),
+              padding: EdgeInsets.symmetric(
+                vertical: isSmallScreen ? 100 : 180,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -108,7 +117,6 @@ class _StartedScreenState extends State<StartedScreen> {
                           });
                           print("Error signing in with Google: $e");
                         });
-                        ;
                       },
                       text: "Google",
                       icon: FontAwesomeIcons.google,
@@ -118,34 +126,34 @@ class _StartedScreenState extends State<StartedScreen> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 90.0, bottom: 20),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, LoginScreen.id);
-                },
-                child: Text.rich(TextSpan(children: [
-                  TextSpan(
-                      text: "Already have an account? ",
-                      style: TextStyle(color: Colors.grey, fontSize: 20)),
-                  TextSpan(
-                      text: "LOGIN",
-                      style: TextStyle(
-                          color: Theme.of(context)
-                              .appBarTheme
-                              .titleTextStyle!
-                              .color,
-                          fontSize: 20))
-                ])),
-              ),
+SizedBox(height: MediaQuery.of(context).size.height * 0.33),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, LoginScreen.id);
+              },
+              child: Text.rich(TextSpan(children: [
+                TextSpan(
+                    text: "Already have an account? ",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: isSmallScreen ? 18 : 20,
+                    )),
+                TextSpan(
+                    text: "LOGIN",
+                    style: TextStyle(
+                        color: Theme.of(context)
+                            .appBarTheme
+                            .titleTextStyle!
+                            .color,
+                        fontSize: isSmallScreen ? 16 : 20))
+              ])),
             ),
-            Expanded(
-              child: CustomContainer(
-                  text: "Go To Registration",
-                  onTap: () {
-                    Navigator.pushNamed(context, Sign_Up.id);
-                  }),
-            )
+            Spacer(),
+            CustomContainer(
+                text: "Go To Registration",
+                onTap: () {
+                  Navigator.pushNamed(context, SignUp.id);
+                }),
           ],
         ),
       ),

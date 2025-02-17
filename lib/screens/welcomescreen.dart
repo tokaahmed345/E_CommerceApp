@@ -13,31 +13,39 @@ class Welcome_Screen extends StatefulWidget {
 class _Welcome_ScreenState extends State<Welcome_Screen> {
   @override
   Widget build(BuildContext context) {
+    // Get the screen width and height for responsive design
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    // Adjust padding and positioning dynamically based on screen size
+    double padding = screenWidth < 600 ? 10.0 : 20.0;
+    double bottomPosition = screenHeight < 600 ? 10 : 20;
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.centerLeft,
-                tileMode: TileMode.mirror,
-                colors: [
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.centerLeft,
+            tileMode: TileMode.mirror,
+            colors: [
               Color(0xffB0A3E5),
               Color(0xff7661C5),
-            ])),
+            ]
+          ),
+        ),
         child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            Positioned.fill(
               child: Image(
                 image: AssetImage("assets/images/background.png"),
-                fit: BoxFit.fill,
-                height: double.infinity,
+                fit: BoxFit.cover, 
               ),
             ),
             Positioned(
-              bottom: 20,
-              right: 20,
-              left: 20,
+              bottom: bottomPosition,
+              right: padding,
+              left: padding,
               child: Customcard(),
             ),
           ],

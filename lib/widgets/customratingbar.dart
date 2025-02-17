@@ -3,28 +3,39 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CustomRatingBar extends StatefulWidget {
   const CustomRatingBar({super.key, this.rating});
-   final   double ?rating;
+
+  final double? rating;
 
   @override
   State<CustomRatingBar> createState() => _CustomRatingBarState();
 }
 
 class _CustomRatingBarState extends State<CustomRatingBar> {
-double rating =2.5;
+  late double rating;
+
+  @override
+  void initState() {
+    super.initState();
+    rating = widget.rating ?? 2.5;
+  }
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double itemSize = screenWidth * 0.06;
+
     return RatingBar.builder(
-  initialRating: widget.rating??2.5,
-  minRating: 1,
-  itemSize: 20,
-  itemCount: 5,
-  allowHalfRating: true,
-  itemBuilder: (context,_)=>Icon(Icons.star,color: Colors.amber,), 
-  onRatingUpdate:(Value){
-    setState(() {
-    rating =Value
-;
-    });
-  } ) ;
+      initialRating: rating,
+      minRating: 1,
+      itemSize: itemSize,
+      itemCount: 5,
+      allowHalfRating: true,
+      itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber),
+      onRatingUpdate: (value) {
+        setState(() {
+          rating = value;
+        });
+      },
+    );
   }
 }

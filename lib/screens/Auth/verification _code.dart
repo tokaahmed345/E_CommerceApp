@@ -17,7 +17,6 @@ class VerificationCode extends StatefulWidget {
   @override
   State<VerificationCode> createState() => _VerificationCodeState();
 }
-
 class _VerificationCodeState extends State<VerificationCode> {
   GlobalKey<FormState> key = GlobalKey();
   List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
@@ -37,11 +36,10 @@ class _VerificationCodeState extends State<VerificationCode> {
   @override
   void dispose() {
     timer.cancel(); 
-   for (var nodes in focusNodes){
-nodes.dispose();
+    for (var nodes in focusNodes) {
+      nodes.dispose();
     };
     super.dispose();
-
   }
 
   void startCountdown() {
@@ -71,8 +69,7 @@ nodes.dispose();
               arguments: email,
             );
           } else if (state is VerficationFailure) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.message)));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
           } else if (state is VerficationLoading) {
             Center(child: CircularProgressIndicator());
           }
@@ -82,71 +79,87 @@ nodes.dispose();
             inAsyncCall: state is VerficationLoading,
             child: Scaffold(
               resizeToAvoidBottomInset: false,
-              backgroundColor:Theme.of(context).scaffoldBackgroundColor,
-              appBar:CustomAppBar(title: ""),
-              body: Form(
-                key: key,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Verification Code",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              appBar: CustomAppBar(title: ""),
+              body: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * 0.05,  // Dynamic padding
+                      vertical: MediaQuery.of(context).size.height * 0.05,  // Dynamic vertical padding
                     ),
-                    const Image(image: AssetImage("assets/images/IMG.png")),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(4, (index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                          child: SizedBox(
-                            width: 50,
-                            child: TextField(
-                              onChanged: (val){
-            if(val.isNotEmpty && index<3){
-            FocusScope.of(context).requestFocus(focusNodes[index+1])   ;
-            }else if (val .isEmpty&&index>0){
-            FocusScope.of(context).requestFocus(focusNodes[index-1])   ;
-            
-            }
-                              },
-                              controller: controllers[index],
-                              focusNode: focusNodes[index],
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.center,
-                              maxLength: 1,
-                              decoration: InputDecoration(
-                                counterText: "",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                    child: Form(
+                      key: key,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Verification Code",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: MediaQuery.of(context).size.width * 0.08, // Dynamic font size
+                            ),
+                          ),
+                          const Image(image: AssetImage("assets/images/IMG.png")),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(4, (index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.12, // Dynamic width for each input box
+                                  child: TextField(
+                                    onChanged: (val){
+                                      if(val.isNotEmpty && index < 3){
+                                        FocusScope.of(context).requestFocus(focusNodes[index + 1]);
+                                      } else if (val.isEmpty && index > 0){
+                                        FocusScope.of(context).requestFocus(focusNodes[index - 1]);
+                                      }
+                                    },
+                                    controller: controllers[index],
+                                    focusNode: focusNodes[index],
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    maxLength: 1,
+                                    decoration: InputDecoration(
+                                      counterText: "",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                  ),
                                 ),
+                              );
+                            }),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05), // Dynamic spacing
+                            child: Text(
+                              countdown > 0
+                                  ? "$countdown seconds remaining to resend code."
+                                  : "Resend confirmation code.",
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: MediaQuery.of(context).size.width * 0.04, // Dynamic font size
                               ),
                             ),
                           ),
-                        );
-                      }),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 100.0),
-                      child: Text(
-                        countdown > 0
-                            ? "$countdown seconds remaining to resend code."
-                            : "Resend confirmation code.",
-                        style: const TextStyle(color: Colors.grey),
+                         
+                        ],
                       ),
                     ),
-                    CustomContainer(
-                      text: "Confirm Code",
-                      onTap: () async {
-                        code = controllers.map((controller) => controller.text).join();
-                        if (code.length == 4) {
-                          BlocProvider.of<VerficationCubit>(context)
-                              .Verfy(email: email, code: code);
-                        }
-                      },
-                    ),
-                  ],
-                ),
+                  ),
+                  Spacer(),
+                 CustomContainer(
+                        text: "Confirm Code",
+                        onTap: () async {
+                          code = controllers.map((controller) => controller.text).join();
+                          if (code.length == 4) {
+                            BlocProvider.of<VerficationCubit>(context).Verfy(email: email, code: code);
+                          }
+                        },
+                      ),
+                ],
               ),
             ),
           );
@@ -155,3 +168,5 @@ nodes.dispose();
     );
   }
 }
+
+

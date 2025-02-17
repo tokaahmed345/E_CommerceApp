@@ -16,32 +16,40 @@ bool isSkipSelected = false;
 class _CustomcardState extends State<Customcard> {
   @override
   Widget build(BuildContext context) {
+    // Get the screen width and height for responsive design
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    
+    // Adjust padding and font sizes based on screen size
+    double padding = screenWidth < 600 ? 16.0 : 26.0;
+    double fontSizeTitle = screenWidth < 600 ? 22.0 : 27.0;
+    double fontSizeBody = screenWidth < 600 ? 16.0 : 20.0;
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding: const EdgeInsets.all(26.0),
+        padding: EdgeInsets.all(padding),
         child: Column(
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
               child: Text(
-                "Look Good,Feel Good",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27),
+                "Look Good, Feel Good",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSizeTitle),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Text(
-                "Create  your individual & Unique style and look amazing everyday.",
-                style: TextStyle(fontSize: 20, color: Colors.grey),
+                "Create your individual & Unique style and look amazing every day.",
+                style: TextStyle(fontSize: fontSizeBody, color: Colors.grey),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: CustomButton(
                     onPressed: () {
                       isMenSelected = true;
@@ -58,15 +66,14 @@ class _CustomcardState extends State<Customcard> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: CustomButton(
                     onPressed: () {
                       isMenSelected = false;
                       isWomenSelected = true;
                       isSkipSelected = false;
                       setState(() {});
-                   Navigator.pushNamed(context, StartedScreen.id);
-
+                      Navigator.pushNamed(context, StartedScreen.id);
                     },
                     text: "Women",
                     textColor: isWomenSelected ? Colors.white : Colors.grey,
@@ -74,19 +81,18 @@ class _CustomcardState extends State<Customcard> {
                         ? Color(0xff9775fa)
                         : Colors.grey[100] ?? Colors.grey,
                   ),
-                )
+                ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: CustomButton(
                 onPressed: () {
                   isMenSelected = false;
                   isWomenSelected = false;
                   isSkipSelected = true;
                   setState(() {});
-                Navigator.pushNamed(context, StartedScreen.id);
-
+                  Navigator.pushNamed(context, StartedScreen.id);
                 },
                 text: "Skip",
                 textColor: isSkipSelected ? Colors.white : Colors.grey,
@@ -94,7 +100,7 @@ class _CustomcardState extends State<Customcard> {
                     ? Color(0xff9775fa)
                     : Colors.grey[100] ?? Colors.grey,
               ),
-            )
+            ),
           ],
         ),
       ),

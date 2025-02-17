@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lazashopping/screens/welcomescreen.dart';
 
-class Splash_Screan extends StatefulWidget {
-  const Splash_Screan({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
   static String id = "splash";
 
   @override
-  State<Splash_Screan> createState() => _Splash_ScreanState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _Splash_ScreanState extends State<Splash_Screan> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
@@ -21,8 +21,19 @@ class _Splash_ScreanState extends State<Splash_Screan> {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen width and height for responsive design
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      body: Image(image: AssetImage("assets/images/Splash.png")),
+      body: Center(
+        child: Image.asset(
+          "assets/images/Splash.png",
+          width: screenWidth,  // Set width to cover the entire screen width
+          height: screenHeight, // Set height to cover the entire screen height
+          fit: BoxFit.cover,  // Ensure the image covers the available space without distortion
+        ),
+      ),
     );
   }
 }

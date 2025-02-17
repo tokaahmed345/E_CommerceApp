@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class CustomWishListTitleRow extends StatelessWidget {
@@ -8,6 +7,12 @@ class CustomWishListTitleRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Using MediaQuery to get the screen width
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    // Adjust layout for smaller screen sizes (e.g., mobile)
+    bool isSmallScreen = screenWidth < 600;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 20),
       child: Row(
@@ -23,10 +28,15 @@ class CustomWishListTitleRow extends StatelessWidget {
               icon: Icon(Icons.arrow_back_ios, color: Colors.black),
             ),
           ),
-          Text(
-            "Wishlist",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-          ),
+          isSmallScreen
+              ? Text(
+                  "Wishlist",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                )
+              : Text(
+                  "Wishlist",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                ),
           CircleAvatar(
             radius: 25,
             backgroundColor: Colors.white,

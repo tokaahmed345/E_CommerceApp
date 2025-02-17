@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazashopping/cubits/cubit/cartcubit/add_to_cart_cubit.dart';
+import 'package:lazashopping/helpers/helper.dart';
 import 'package:lazashopping/model/ProductDetails/iteminfo.dart';
 import 'package:lazashopping/screens/Cart/cart-screen.dart';
 import 'package:lazashopping/screens/DetailsProduct.dart/customwedgit/custom_info_bode.dart';
@@ -90,20 +92,11 @@ class CustomColumninfoCard extends StatelessWidget {
               if (state is AddToCartLoading) {
                 Center(child: CircularProgressIndicator());
               } else if (state is AddToCartFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: const Color.fromARGB(255, 231, 85, 209),
-                    content: Text(state.message),
-                  ),
-                );
+                          Helpers.showSnackbar(context, state.message,backgroundColor:  const Color.fromARGB(255, 231, 85, 209));
+
                 Navigator.pushNamed(context, CartView.id);
               } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: const Color.fromARGB(255, 231, 85, 209),
-                    content: Text("Product  added to cart successfully"),
-                  ),
-                );
+            Helpers.showSnackbar(context, "Item already exist",backgroundColor:  const Color.fromARGB(255, 231, 85, 209));
                 Navigator.pushNamed(context, CartView.id);
               }
             },

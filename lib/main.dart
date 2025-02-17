@@ -49,10 +49,10 @@ class MyApp extends StatelessWidget {
             darkTheme: AppTheme.darkTheme,
             themeMode: state,
             routes: {
-              Splash_Screan.id: (context) => Splash_Screan(),
+              SplashScreen.id: (context) => SplashScreen(),
               Welcome_Screen.id: (context) => Welcome_Screen(),
               StartedScreen.id: (context) => StartedScreen(),
-              Sign_Up.id: (context) => Sign_Up(),
+              SignUp.id: (context) => SignUp(),
               ForgotPassword.id: (context) => ForgotPassword(),
               VerificationCode.id: (context) => VerificationCode(),
               NewPassword_Screan.id: (context) => NewPassword_Screan(),
@@ -73,9 +73,9 @@ class MyApp extends StatelessWidget {
               AccountInfoScreen.id:(context)=>AccountInfoScreen()
             },
             initialRoute:
-                  // Splash_Screan.id
+                 // SplashScreen.id
                 SharedPref.getToken() == null
-                    ? Splash_Screan.id
+                    ? SplashScreen.id
                     : HomeScreen.id,
           );
         },

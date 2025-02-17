@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazashopping/cubits/cubit/cartcubit/calculate_total_cubit.dart';
 import 'package:lazashopping/cubits/cubit/cartcubit/get_all_item_in_cart_cubit.dart';
+import 'package:lazashopping/helpers/helper.dart';
 import 'package:lazashopping/model/CartModel/getallitemincart.dart';
 import 'package:lazashopping/screens/Cart/addressscreen.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
@@ -22,14 +23,22 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
+
     final Map<String, dynamic>? controllers =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+    // Get screen width and height from MediaQuery
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => GetAllItemInCartCubit(
-                getAllItemsServices: GetAllItemInCartServices())
-              ..getAllItemsInCart()),
+          create: (context) => GetAllItemInCartCubit(
+            getAllItemsServices: GetAllItemInCartServices(),
+          )..getAllItemsInCart(),
+        ),
         BlocProvider(create: (context) => CalculateTotalCubit()),
       ],
       child: BlocConsumer<GetAllItemInCartCubit, GetAllItemInCartState>(
@@ -37,6 +46,7 @@ class CartView extends StatelessWidget {
           if (state is GetAllItemInCartFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+
                 backgroundColor: Colors.red,
                 content: Text(state.message),
               ),
@@ -56,30 +66,41 @@ class CartView extends StatelessWidget {
                         return const Center(child: CircularProgressIndicator());
                       } else if (state is GetAllItemInCartFailure) {
                         return Center(
-                          child: Text("Error: ${state.message}",
-                              style: const TextStyle(color: Colors.red)),
+                          child: Text(
+                            "Error: ${state.message}",
+                            style: const TextStyle(color: Colors.red),
+                          ),
                         );
                       } else if (state is GetAllItemInCartSuccess) {
                         List<dynamic> items = state.getAllItems["Items"] ?? [];
+
                         if (items.isEmpty) {
                           return Center(
-                              child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 70.0),
-                            child: Column(children: [
-                              Lottie.asset(
-                                  "assets/images/Animation - 1739721795829.json"),
-                              Text(
-                                "Cart Is Empty ",
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    color: const Color.fromARGB(
-                                        255, 133, 39, 176)),
-                              )
-                            ]),
-                          ));
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: screenHeight * 0.1),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(
+                                    width: screenWidth * 0.5,
+                                    child: Lottie.asset("assets/images/Animation - 1739721795829.json"),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    "Cart Is Empty",
+                                    style: TextStyle(
+                                      fontSize: screenWidth * 0.06,
+                                      color: const Color.fromARGB(255, 133, 39, 176),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
                         }
+
                         return ListView(
-                          padding: const EdgeInsets.all(16),
+                          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
                           children: [
                             ...items.map((item) => CustomCardCart(
                                   productid: item["ProductId"],
@@ -88,17 +109,16 @@ class CartView extends StatelessWidget {
                                   productName: item["ProductName"],
                                   quantity: item["Quantity"],
                                 )),
-                            const SizedBox(height: 16),
+                            SizedBox(height: screenHeight * 0.02),
                             const CustomTitleCard(title: 'Delivery Address'),
                             CustomAddressSection(
                               onTap: () {
                                 Navigator.pushNamed(context, AddressScreen.id);
                               },
-                              title: controllers?["address"] ??
-                                  "click to add address",
+                              title: controllers?["address"] ?? "Click to add address",
                               subTitle: controllers?["country"] ?? "",
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: screenHeight * 0.02),
                             const CustomTitleCard(title: "Payment Methods"),
                             CustomListtileCard(
                               onTap: () {
@@ -108,39 +128,35 @@ class CartView extends StatelessWidget {
                               subTitle: "**** 7690",
                               image: "assets/images/Frame.png",
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: screenHeight * 0.02),
                             const CustomTitleCard(title: 'Order Info'),
                             SummaryOrderInfo(
                               items: state.getAllItems["Items"] ?? [],
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: screenHeight * 0.02),
                           ],
                         );
                       } else {
-                        return const Center(
-                            child: Text("Something went wrong"));
+                        return const Center(child: Text("Something went wrong"));
                       }
                     },
                   ),
                 ),
-                CustomContainer(
-                  text: "Checkout",
-                  onTap: () {
-                    final currentState =
-                        BlocProvider.of<GetAllItemInCartCubit>(context).state;
+                Container(
+                  child: CustomContainer(
+                    text: "Checkout",
+                    onTap: () {
+                      final currentState = BlocProvider.of<GetAllItemInCartCubit>(context).state;
 
-                    if (currentState is GetAllItemInCartSuccess &&
-                        currentState.getAllItems["Items"] != null &&
-                        currentState.getAllItems["Items"].isNotEmpty) {
-                      Navigator.pushNamed(context, OrderConfirmedScreen.id);
-                    } else {
-                      
-                      ScaffoldMessenger.of(context).showSnackBar(
-                      
-                      SnackBar(
-                        duration: Duration(seconds: 1),
-                        backgroundColor: const Color.fromARGB(255, 231, 85, 209),content: Text("No items in cart",style: TextStyle(fontSize: 22),),));}
-                  },
+                      if (currentState is GetAllItemInCartSuccess &&
+                          currentState.getAllItems["Items"] != null &&
+                          currentState.getAllItems["Items"].isNotEmpty) {
+                        Navigator.pushNamed(context, OrderConfirmedScreen.id);
+                      } else {
+               Helpers.showSnackbar(context, "No Item Found",backgroundColor: const Color.fromARGB(255, 231, 85, 209));
+                      }
+                    },
+                  ),
                 ),
               ],
             ),
