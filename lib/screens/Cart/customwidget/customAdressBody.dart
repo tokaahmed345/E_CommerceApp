@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:lazashopping/helpers/helper.dart';
 import 'package:lazashopping/screens/Cart/cart-screen.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customadresstextfield.dart';
+import 'package:lazashopping/sharedpref/sharedprefrance.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 
-class CustomColumnAdreesBody extends StatelessWidget {
+class CustomColumnAdreesBody extends StatefulWidget {
   const CustomColumnAdreesBody({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    // Controllers for the text fields
-    final TextEditingController nameController = TextEditingController();
+  State<CustomColumnAdreesBody> createState() => _CustomColumnAdreesBodyState();
+}
+   final TextEditingController nameController = TextEditingController();
     final TextEditingController countryController = TextEditingController();
     final TextEditingController cityController = TextEditingController();
     final TextEditingController phoneController = TextEditingController();
     final TextEditingController addressController = TextEditingController();
 
+
+class _CustomColumnAdreesBodyState extends State<CustomColumnAdreesBody> {
+  @override
+  Widget build(BuildContext context) {
+    // Controllers for the text fields
+ 
     // Get screen width and height from MediaQuery
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -93,11 +101,15 @@ class CustomColumnAdreesBody extends StatelessWidget {
       
        CustomContainer(
                 text: "Save Address",
-                onTap: () {
-                  Navigator.pushNamed(context, CartView.id, arguments: {
-                    "country": countryController.text,
-                    "address": addressController.text,
-                  });
+                onTap: () async{
+                   if (countryController.text.isNotEmpty && addressController.text.isNotEmpty) {
+      await SharedPref.setAddress(countryController.text, addressController.text);
+      Navigator.pushNamed(context, CartView.id);
+    } else {
+      // You can show a snackbar or alert to the user indicating that the address fields can't be empty
+      Helpers.showSnackbar(context, "Please fill in both country and address");
+    }
+  
                 },
               ),
       ],

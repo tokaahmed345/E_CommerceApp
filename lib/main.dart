@@ -73,10 +73,10 @@ class MyApp extends StatelessWidget {
               AccountInfoScreen.id:(context)=>AccountInfoScreen()
             },
             initialRoute:
-                 // SplashScreen.id
-                SharedPref.getToken() == null
-                    ? SplashScreen.id
-                    : HomeScreen.id,
+                 SplashScreen.id
+                // SharedPref.getToken() == null
+                //     ? SplashScreen.id
+                //     : HomeScreen.id,
           );
         },
       ),

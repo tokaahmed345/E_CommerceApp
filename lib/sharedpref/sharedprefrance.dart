@@ -51,5 +51,30 @@ static Future<void> logout() async {
   await prefs.remove('password');
   await prefs.remove('email');
 }
+static Future <void>setAddress(String country, String address)async{
+  await prefs.setString("country", country);
+  await prefs.setString("address", address);
+
+}
+static Future<Map<String,String>>getAddress()async{
+  String ?country= await prefs.getString("country")??"";
+  String ?address= await prefs.getString("address")??"";
+    if (address.isEmpty && country.isEmpty) {
+    return {'address': 'Click to add address', 'country': ''};
+  }
+
+return {
+  "country":country,
+  "address":address
+
+};
+
+
+}
+ static Future<void> clearAddress() async {
+    await prefs.remove("country");
+    await prefs.remove("address");
+  }
+
 
 }

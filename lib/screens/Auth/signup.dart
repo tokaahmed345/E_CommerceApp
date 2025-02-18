@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazashopping/component/clipper.dart';
-import 'package:lazashopping/cubits/cubit/login-cubit/login_cubit.dart';
 import 'package:lazashopping/cubits/cubit/register-cubit/registration_cubit.dart';
-import 'package:lazashopping/model/AuthModel/login.dart';
 import 'package:lazashopping/screens/Auth/login.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
 import 'package:lazashopping/services/AuthServices/register.dart';
 import 'package:lazashopping/sharedpref/sharedprefrance.dart';
-import 'package:lazashopping/widgets/customappbar.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customtextfield.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -21,9 +17,6 @@ class SignUp extends StatefulWidget {
   State<SignUp> createState() => _SignUpState();
 }
 class _SignUpState extends State<SignUp> {
-
-  @override
-  Widget build(BuildContext context) {
       GlobalKey<FormState> globalKey = GlobalKey();
   RegisterServices reg = RegisterServices();
   bool isShow = false;
@@ -31,6 +24,9 @@ class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController UserNameController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
 
     return BlocProvider(
       create: (context) => RegistrationCubit(registered: RegisterServices()),
