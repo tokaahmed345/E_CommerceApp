@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazashopping/cubits/cubit/allreviewcubit/cubit/all_review_cubit.dart';
+import 'package:lazashopping/screens/AddReview/add_review_screen.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
-import 'package:lazashopping/screens/addreview/add_review_screen.dart';
-import 'package:lazashopping/screens/addreview/customwidget/custombar.dart';
 import 'package:lazashopping/services/reviewservices/allreview.dart';
 import 'package:lazashopping/widgets/customcolumnreview.dart';
 import 'package:lazashopping/widgets/customratingbar.dart';
@@ -14,7 +13,8 @@ class ReviewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String productId = ModalRoute.of(context)!.settings.arguments as String;
+    final String productId =
+        ModalRoute.of(context)!.settings.arguments as String;
     final AllReviewServces reviewServices = AllReviewServces();
 
     return BlocProvider(
@@ -22,15 +22,14 @@ class ReviewsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: CustomAppBar(title: "Reviews"),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: SingleChildScrollView(  // Make the body scrollable
+        body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.05,  // Dynamic horizontal padding
-              vertical: MediaQuery.of(context).size.height * 0.03,  // Dynamic vertical padding
+              horizontal: MediaQuery.of(context).size.width * 0.05,
+              vertical: MediaQuery.of(context).size.height * 0.03,
             ),
             child: Column(
               children: [
-     
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -47,7 +46,8 @@ class ReviewsScreen extends StatelessWidget {
                           return Text("Loading...",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: MediaQuery.of(context).size.width * 0.05)); // Responsive font size
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.05));
                         } else if (state is ReviewSuccess) {
                           int reviewCount = state.reviews.length;
                           double averageRating = state.reviews
@@ -59,14 +59,19 @@ class ReviewsScreen extends StatelessWidget {
                               Text("$reviewCount Reviews",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: MediaQuery.of(context).size.width * 0.06)),  // Adjusted font size
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.06)),
                               Row(
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
                                       averageRating.toStringAsFixed(1),
-                                      style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),  // Adjusted font size
+                                      style: TextStyle(
+                                          fontSize:
+                                              MediaQuery.of(context).size.width *
+                                                  0.05),
                                     ),
                                   ),
                                   CustomRatingBar(rating: averageRating),
@@ -76,7 +81,9 @@ class ReviewsScreen extends StatelessWidget {
                           );
                         } else {
                           return Text("No reviews yet.",
-                              style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.02));  // Smaller font for "No reviews"
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.02));
                         }
                       },
                     ),
@@ -89,19 +96,27 @@ class ReviewsScreen extends StatelessWidget {
                       ),
                       child: InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, AddReviewScreen.id, arguments: productId);
+
+                          Navigator.pushNamed(context, AddReviewScreen.id,
+                                  arguments: productId)
+                              .then((_) => BlocProvider.of<AllReviewCubit>(
+                                      context)
+                                  .fetchData(productId)); // التحديث هنا
                         },
                         child: Row(
                           children: [
                             Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: Icon(Icons.reviews_outlined, color: Colors.white)),
+                                child: Icon(Icons.reviews_outlined,
+                                    color: Colors.white)),
                             Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Text("Add Review",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: MediaQuery.of(context).size.width * 0.05)),  // Adjusted font size
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.05)),
                             ),
                           ],
                         ),
@@ -125,10 +140,10 @@ class ReviewsScreen extends StatelessWidget {
                       var data = state.reviews;
                       return Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: MediaQuery.of(context).size.width * 0.01,  // Dynamic horizontal padding
+                          horizontal: MediaQuery.of(context).size.width * 0.01,
                         ),
                         child: ListView.builder(
-                          shrinkWrap: true,  // Use for making the ListView flexible
+                          shrinkWrap: true,
                           itemCount: data.length,
                           itemBuilder: (context, index) {
                             return ReviewSection(info: data[index]);

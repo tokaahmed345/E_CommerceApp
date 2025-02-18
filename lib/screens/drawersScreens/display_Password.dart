@@ -42,15 +42,27 @@ class DisplayPasswordScreen extends StatelessWidget {
                     color: Theme.of(context).cardTheme.color,
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
-                  child: Text(
-                    "Your Password is: ${snapshot.data ?? 'No password saved'}",
-                    style: TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 231, 85, 209),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                     child:  Text.rich(TextSpan(children: [
+                TextSpan(
+                  text:"Your Password is : " ,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.06,
+                    color: const Color.fromARGB(255, 198, 49, 49),
+                                                      fontWeight: FontWeight.bold,
+
+                   ),
+                ),
+                TextSpan(
+                  text: "${snapshot.data??""}",
+                  style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width * 0.06,
+                    color: const Color.fromARGB(255, 195, 85, 231),
+                                  fontWeight: FontWeight.bold,
+
+                     ),
+                    
+                ),
+              ]))
                 ),
               ),
             );

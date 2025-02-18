@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazashopping/cubits/cubit/AddReview-cubit/add_review_cubit.dart';
+import 'package:lazashopping/cubits/cubit/allreviewcubit/cubit/all_review_cubit.dart';
 import 'package:lazashopping/helpers/helper.dart';
+import 'package:lazashopping/screens/AddReview/customwidget/customreviewslider.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
 import 'package:lazashopping/screens/addreview/customtextfieldreview.dart';
-import 'package:lazashopping/screens/addreview/customwidget/custombar.dart';
-import 'package:lazashopping/screens/addreview/customwidget/customreviewslider.dart';
 import 'package:lazashopping/services/reviewservices/addreviewservces.dart';
+import 'package:lazashopping/services/reviewservices/allreview.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customtextfield.dart';
 
 class AddReviewScreen extends StatefulWidget {
   const AddReviewScreen({super.key});
-
   static String id = "addreviewscreen";
 
   @override
@@ -29,72 +29,66 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
   Widget build(BuildContext context) {
     final String id = ModalRoute.of(context)!.settings.arguments as String;
 
-    // Get screen width and height using MediaQuery
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
-    // Responsive padding and text size
     double padding = screenWidth < 400 ? 12.0 : 10.0;
-    double textFontSize = screenWidth < 400 ? 16.0 : 22.0;
     double titleFontSize = screenWidth < 400 ? 18.0 : 22.0;
 
-    return BlocProvider(
-      create: (context) => AddReviewCubit(servces),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AllReviewCubit>(
+          create: (context) => AllReviewCubit(AllReviewServces()),
+        ),
+        BlocProvider<AddReviewCubit>(
+          create: (context) => AddReviewCubit(
+            AddReviewService(),
+            BlocProvider.of<AllReviewCubit>(context),
+          ),
+        ),
+      ],
       child: BlocConsumer<AddReviewCubit, AddReviewState>(
         listener: (context, state) {
           if (state is AddReviewLoading) {
-            Center(child: CircularProgressIndicator());
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => Center(child: CircularProgressIndicator()),
+            );
           } else if (state is AddReviewSuccess) {
-                      Helpers.showSnackbar(context, "Review Added Successfully",backgroundColor: const Color.fromARGB(255, 231, 85, 209));
-
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(); // إغلاق الـ Dialog عند النجاح
+            Helpers.showSnackbar(
+              context,
+              "Review Added Successfully",
+              backgroundColor: Colors.green,
+            );
+            Navigator.of(context).pop(); // العودة إلى الشاشة السابقة
           } else if (state is AddReviewFailure) {
-            Helpers.showSnackbar(context, state.message,backgroundColor: const Color.fromARGB(255, 231, 85, 209));
+            Navigator.of(context).pop(); // إغلاق الـ Dialog عند الفشل
+            Helpers.showSnackbar(
+              context,
+              state.message,
+              backgroundColor: Colors.red,
+            );
           }
         },
         builder: (context, state) {
           return Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar:                       CustomAppBar(title: "Add Review", ),
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            appBar: CustomAppBar(title: "Add Review"),
             body: Column(
-
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: screenHeight * 0.01, horizontal: padding),
+                  padding: EdgeInsets.all(padding),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: screenHeight * 0.025),
-                      Text(
-                        "Name",
-                        style: TextStyle(
-                            fontSize: titleFontSize,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 8),
-                      CustomTextField(
-                        hintText: "Type your Name",
-                        controller: userNameController,
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        "How Was Your Experience? ",
-                        style: TextStyle(
-                            fontSize: titleFontSize,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 8),
-                      CustomTextFieldReview(
-                        num: 9,
-                        hintText: "Describe your Experience?",
-                        controller: experienceController,
-                      ),
-                      SizedBox(height: 20),
-                      Text("Star",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20)),
+                      Text("Name", style: TextStyle(fontSize: titleFontSize, fontWeight: FontWeight.bold)),
+                      CustomTextField(hintText: "Type your Name", controller: userNameController),
+                      SizedBox(height: screenHeight * 0.02), 
+                      Text("How Was Your Experience?", style: TextStyle(fontSize: titleFontSize, fontWeight: FontWeight.bold)),
+                      CustomTextFieldReview(num: 10, hintText: "Describe your Experience?", controller: experienceController),
+                      SizedBox(height: screenHeight * 0.02),
+                      Text("Star", style: TextStyle(fontWeight: FontWeight.bold, fontSize: titleFontSize)),
                       CustomSlider(
                         onRatingChanged: (value) {
                           setState(() {
@@ -108,12 +102,23 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                 Spacer(),
                 CustomContainer(
                   text: "Submit Review",
-                  onTap: ()async {
-                 await   BlocProvider.of<AddReviewCubit>(context).submitReview(
-                        id: id,
-                        userName: userNameController.text,
-                        feedBack: experienceController.text,
-                        rating: rating);
+                  onTap: () {
+                    BlocProvider.of<AddReviewCubit>(context).submitReview(
+                      id: id,
+                      userName: userNameController.text,
+                      feedBack: experienceController.text,
+                      rating: rating,
+                    ).then((_) {
+                      BlocProvider.of<AllReviewCubit>(context).fetchData(id);
+                      Navigator.of(context).pop(); // العودة إلى الشاشة السابقة
+                    }).catchError((error) {
+                      Navigator.of(context).pop(); // إغلاق الـ Dialog عند الخطأ
+                      Helpers.showSnackbar(
+                        context,
+                        "Failed to add review: $error",
+                        backgroundColor: Colors.red,
+                      );
+                    });
                   },
                 ),
               ],

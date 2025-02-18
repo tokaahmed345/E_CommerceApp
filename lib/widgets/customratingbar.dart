@@ -22,7 +22,7 @@ class _CustomRatingBarState extends State<CustomRatingBar> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double itemSize = screenWidth * 0.06;
+    double itemSize = screenWidth * 0.05;
 
     return RatingBar.builder(
       initialRating: rating,

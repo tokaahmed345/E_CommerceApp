@@ -13,8 +13,8 @@ class ReviewSection extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: screenWidth * 0.05,  // Dynamic horizontal padding
-        vertical: screenHeight * 0.02,  // Dynamic vertical padding
+        horizontal: screenWidth * 0.01,  // Dynamic horizontal padding
+        vertical: screenHeight * 0.01,  // Dynamic vertical padding
       ),
       child: Column(
         children: [

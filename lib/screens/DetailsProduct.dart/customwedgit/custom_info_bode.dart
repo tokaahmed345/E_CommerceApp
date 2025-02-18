@@ -1,12 +1,12 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart'; // لاستعمال TapGestureRecognizer
 import 'package:lazashopping/model/ProductDetails/iteminfo.dart';
 import 'package:lazashopping/screens/AllReview/reviewsscreen.dart';
 import 'package:lazashopping/widgets/custom-item-shape.dart';
 import 'package:lazashopping/widgets/custom_row_size_section.dart';
 import 'package:lazashopping/widgets/customcolumnreview.dart';
 
-class CustomInfoBody extends StatelessWidget {
+class CustomInfoBody extends StatefulWidget {
   const CustomInfoBody({
     super.key,
     required this.itemdetails,
@@ -19,7 +19,19 @@ class CustomInfoBody extends StatelessWidget {
   final double screenHeight;
 
   @override
+  _CustomInfoBodyState createState() => _CustomInfoBodyState();
+}
+
+class _CustomInfoBodyState extends State<CustomInfoBody> {
+  bool _showFullDescription = false; 
+
+  @override
   Widget build(BuildContext context) {
+    final String description = widget.itemdetails.description ?? "";
+    final String truncatedDescription = description.length > 100
+        ? description.substring(0, 100) + "..."
+        : description;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
       child: Column(
@@ -29,15 +41,15 @@ class CustomInfoBody extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  itemdetails.name ?? "SportProduct",
+                  widget.itemdetails.name ?? "SportProduct",
                   style: TextStyle(
-                      color: Colors.grey, fontSize: 19 * textScaleFactor),
+                      color: Colors.grey, fontSize: 19 * widget.textScaleFactor),
                 ),
               ),
               Text(
                 "price",
                 style: TextStyle(
-                    color: Colors.grey, fontSize: 18 * textScaleFactor),
+                    color: Colors.grey, fontSize: 18 * widget.textScaleFactor),
               ),
             ],
           ),
@@ -45,27 +57,26 @@ class CustomInfoBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                itemdetails.categoryId ?? " ",
+                widget.itemdetails.categoryId ?? " ",
                 style: TextStyle(
-                    fontSize: 20 * textScaleFactor,
+                    fontSize: 20 * widget.textScaleFactor,
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "\$${itemdetails.price}",
+                "\$${widget.itemdetails.price}",
                 style: TextStyle(
-                    fontSize: 20 * textScaleFactor,
+                    fontSize: 20 * widget.textScaleFactor,
                     fontWeight: FontWeight.bold),
               ),
             ],
           ),
           SizedBox(
-            height: screenHeight *
-                0.09, // Dynamic height for images based on screen height
+            height: widget.screenHeight * 0.09, // Dynamic height for images based on screen height
             child: ListView.builder(
-              itemCount: itemdetails.images!.length,
+              itemCount: widget.itemdetails.images!.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                String image = itemdetails.images![index].image ?? "";
+                String image = widget.itemdetails.images![index].image ?? "";
                 return Row(
                   children: [
                     CustomSideItem(
@@ -82,13 +93,13 @@ class CustomInfoBody extends StatelessWidget {
               Text(
                 "Size",
                 style: TextStyle(
-                    fontSize: 22 * textScaleFactor,
+                    fontSize: 22 * widget.textScaleFactor,
                     fontWeight: FontWeight.bold),
               ),
               Text(
                 "Size Guide",
                 style: TextStyle(
-                    color: Colors.grey, fontSize: 20 * textScaleFactor),
+                    color: Colors.grey, fontSize: 20 * widget.textScaleFactor),
               ),
             ],
           ),
@@ -103,25 +114,30 @@ class CustomInfoBody extends StatelessWidget {
                 "Description",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 22 * textScaleFactor),
+                    fontSize: 22 * widget.textScaleFactor),
               ),
               SizedBox(
                 height: 10,
               ),
               Text.rich(TextSpan(children: [
                 TextSpan(
-                  
-                  text: itemdetails.description,
-                  
+                  text: _showFullDescription
+                      ? description
+                      : truncatedDescription,
                   style: TextStyle(
-                    
-                      fontSize: 20 * textScaleFactor, color: Colors.grey),
+                      fontSize: 20 * widget.textScaleFactor, color: Colors.grey),
                 ),
                 TextSpan(
-                  text: "ReadMore..",
+                  text: _showFullDescription ? " Show Less" : " Read More",
                   style: TextStyle(
-                      fontSize: 20 * textScaleFactor,
+                      fontSize: 20 * widget.textScaleFactor,
                       fontWeight: FontWeight.bold),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      setState(() {
+                        _showFullDescription = !_showFullDescription;
+                      });
+                    },
                 ),
               ])),
             ],
@@ -135,31 +151,27 @@ class CustomInfoBody extends StatelessWidget {
               Text(
                 "Reviews",
                 style: TextStyle(
-                    fontSize: 22 * textScaleFactor,
+                    fontSize: 22 * widget.textScaleFactor,
                     fontWeight: FontWeight.bold),
               ),
               InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, ReviewsScreen.id,
-                      arguments: itemdetails.id);
+                      arguments: widget.itemdetails.id);
                 },
                 child: Text(
                   "View All",
                   style: TextStyle(
-                      color: Colors.grey, fontSize: 20 * textScaleFactor),
+                      color: Colors.grey, fontSize: 20 * widget.textScaleFactor),
                 ),
               ),
             ],
           ),
-          SizedBox(
-            height: 8,
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child:
-                (itemdetails.reviews != null && itemdetails.reviews!.isNotEmpty)
-                    ? ReviewSection(info: itemdetails.reviews!.first)
-                    : SizedBox(),
+            child: (widget.itemdetails.reviews != null && widget.itemdetails.reviews!.isNotEmpty)
+                ? ReviewSection(info: widget.itemdetails.reviews!.first)
+                : SizedBox(),
           ),
           SizedBox(
             height: 10,
@@ -174,20 +186,20 @@ class CustomInfoBody extends StatelessWidget {
                     Text(
                       "Total Price",
                       style: TextStyle(
-                          fontSize: 22 * textScaleFactor,
+                          fontSize: 22 * widget.textScaleFactor,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
                       "with VAT, SD",
                       style: TextStyle(
                           color: const Color.fromARGB(255, 147, 146, 146),
-                          fontSize: 17 * textScaleFactor),
+                          fontSize: 17 * widget.textScaleFactor),
                     ),
                   ],
                 ),
                 Text(
-                  "\$${itemdetails.price}",
-                  style: TextStyle(fontSize: 20 * textScaleFactor),
+                  "\$${widget.itemdetails.price}",
+                  style: TextStyle(fontSize: 20 * widget.textScaleFactor),
                 ),
               ],
             ),

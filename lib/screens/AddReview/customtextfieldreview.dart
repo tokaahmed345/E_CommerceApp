@@ -19,7 +19,7 @@ class CustomTextFieldReview extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    double padding = screenWidth < 400 ? 16.0 : 20.0;
+    double padding = screenWidth < 400 ? 1.0 : 3.0;
     double fontSize = screenWidth < 400 ? 14.0 : 16.0;
 
     return Padding(

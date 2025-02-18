@@ -44,13 +44,7 @@ class CartView extends StatelessWidget {
       child: BlocConsumer<GetAllItemInCartCubit, GetAllItemInCartState>(
         listener: (context, state) {
           if (state is GetAllItemInCartFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-
-                backgroundColor: Colors.red,
-                content: Text(state.message),
-              ),
-            );
+     Helpers.showSnackbar(context, state.message,backgroundColor:  const Color.fromARGB(255, 231, 85, 209));
           }
         },
         builder: (context, state) {
