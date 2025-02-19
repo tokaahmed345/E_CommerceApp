@@ -29,7 +29,7 @@ class _CustomCardContentState extends State<CustomCardContent> {
   Future<void> checkIfFavorite() async {
   try {
     List<GetAllUserWishList> wishlist =
-        await GetUserWishListServices().getAllWishList() ?? [];
+        await GetUserWishListServices().getAllWishList() ;
     
     if (widget.pro is Product) {
       bool favorite = wishlist.any((item) => item.id == (widget.pro as Product).id);
@@ -73,8 +73,6 @@ Future<void> toggleWishlist() async {
     });
   }
 }
-
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;

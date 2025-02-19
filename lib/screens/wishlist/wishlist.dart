@@ -12,7 +12,7 @@ class WishListScreen extends StatelessWidget {
   static String id = 'wishlist';
 
   Future<List<GetAllUserWishList>> fetchAllWishList() async {
-    return await GetUserWishListServices().getAllWishList() ?? [];
+    return await GetUserWishListServices().getAllWishList();
   }
 
   @override
@@ -25,7 +25,7 @@ class WishListScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
-          CustomWishListTitleRow(),
+          const CustomWishListTitleRow(),
           Expanded(
             child: FutureBuilder<List<GetAllUserWishList>>(
               future: fetchAllWishList(),
@@ -56,7 +56,8 @@ class WishListScreen extends StatelessWidget {
                 } else if (snapshot.hasError) {
                   return Column(
                     children: [
-                      Lottie.asset("assets/images/Animation - 1739722032281.json"),
+                      Lottie.asset(
+                          "assets/images/Animation - 1739722032281.json"),
                       Center(
                         child: Text(
                           "WishList Empty",
@@ -68,8 +69,9 @@ class WishListScreen extends StatelessWidget {
                       ),
                     ],
                   );
-                } else if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
                 } else {
                   return Center(
                     child: Text(
@@ -85,7 +87,7 @@ class WishListScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }

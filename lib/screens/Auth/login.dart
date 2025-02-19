@@ -7,7 +7,6 @@ import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
 import 'package:lazashopping/screens/Homepage/homescreen.dart';
 import 'package:lazashopping/services/AuthServices/loginservices.dart';
 import 'package:lazashopping/sharedpref/sharedprefrance.dart';
-import 'package:lazashopping/widgets/customappbar.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customtextfield.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -31,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    
+
     double fontSize = screenWidth < 400 ? 18.0 : 22.0;
     double titleFontSize = screenWidth < 400 ? 30.0 : 40.0;
     double padding = screenWidth < 400 ? 13.0 : 10.0;
@@ -54,8 +53,9 @@ class _LoginScreenState extends State<LoginScreen> {
           return ModalProgressHUD(
             inAsyncCall: state is LogInLoadingState,
             child: Scaffold(
-              resizeToAvoidBottomInset: false, // Ensures keyboard doesn't cover content
-              appBar: CustomAppBar(title:""),
+              resizeToAvoidBottomInset:
+                  false, // Ensures keyboard doesn't cover content
+              appBar: const CustomAppBar(title: ""),
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               body: SafeArea(
                 child: Form(
@@ -63,27 +63,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       Padding(
-                  padding: EdgeInsets.symmetric(horizontal: padding),
+                        padding: EdgeInsets.symmetric(horizontal: padding),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Center(
                                 child: Text(
                               "LOGIN",
-                              style: TextStyle(fontSize: titleFontSize, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: titleFontSize,
+                                  fontWeight: FontWeight.bold),
                             )),
                             SizedBox(height: screenHeight * 0.05),
-                            
+
                             // User Name Section
                             Padding(
-                              padding: EdgeInsets.only(left: padding, bottom: 5),
+                              padding:
+                                  EdgeInsets.only(left: padding, bottom: 5),
                               child: Text(
                                 "UserName",
-                                style: TextStyle(color: Colors.grey, fontSize: fontSize),
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: fontSize),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: padding),
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: padding),
                               child: CustomTextField(
                                 validator: (val) {
                                   if (val == null || val.isEmpty) {
@@ -95,17 +100,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             SizedBox(height: screenHeight * 0.03),
-                            
+
                             // Password Section
                             Padding(
-                              padding: EdgeInsets.only(left: padding, bottom: 5),
+                              padding:
+                                  EdgeInsets.only(left: padding, bottom: 5),
                               child: Text(
                                 "Password",
-                                style: TextStyle(color: Colors.grey, fontSize: fontSize),
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: fontSize),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: padding),
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: padding),
                               child: Stack(
                                 children: [
                                   CustomTextField(
@@ -124,25 +132,33 @@ class _LoginScreenState extends State<LoginScreen> {
                                           isShow = !isShow;
                                         });
                                       },
-                                      icon: isShow ? Icons.visibility : Icons.visibility_off),
+                                      icon: isShow
+                                          ? Icons.visibility
+                                          : Icons.visibility_off),
                                   isShow
                                       ? Padding(
-                                          padding: EdgeInsets.only(right: 30),
+                                          padding:
+                                              const EdgeInsets.only(right: 30),
                                           child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(15),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
                                             child: ClipPath(
                                               clipper: MyClipper(),
                                               child: Container(
                                                 height: 50,
                                                 width: double.infinity,
                                                 decoration: const BoxDecoration(
-                                                  color: Color.fromARGB(255, 205, 98, 255),
+                                                  color: Color.fromARGB(
+                                                      255, 205, 98, 255),
                                                 ),
-                                                padding: const EdgeInsets.only(left: 10),
+                                                padding: const EdgeInsets.only(
+                                                    left: 10),
                                                 alignment: Alignment.centerLeft,
                                                 child: Text(
                                                   passwordController.text,
-                                                  style: const TextStyle(color: Colors.black, fontSize: 20),
+                                                  style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 20),
                                                   maxLines: 1,
                                                 ),
                                               ),
@@ -153,69 +169,80 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ],
                               ),
                             ),
-                            
+
                             // Forgot Password Section
                             Align(
                               alignment: Alignment.bottomRight,
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.pushNamed(context, ForgotPassword.id);
+                                  Navigator.pushNamed(
+                                      context, ForgotPassword.id);
                                 },
-                                child: Text("Forgot Password?", style: TextStyle(color: Colors.red)),
+                                child: const Text("Forgot Password?",
+                                    style: TextStyle(color: Colors.red)),
                               ),
                             ),
                             SizedBox(height: screenHeight * 0.02),
-                            
+
                             // Remember Me Section
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: padding),
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: padding),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Remember me", style: TextStyle(color: Theme.of(context).appBarTheme.titleTextStyle!.color, fontSize: fontSize)),
+                                  Text("Remember me",
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .appBarTheme
+                                              .titleTextStyle!
+                                              .color,
+                                          fontSize: fontSize)),
                                   Switch(
-                                    activeColor: Colors.green,
-                                    value: remember,
-                                    onChanged: (val) {
-                                      setState(() {
-                                        remember = val;
-                                      });
-                                    })
+                                      activeColor: Colors.green,
+                                      value: remember,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          remember = val;
+                                        });
+                                      })
                                 ],
                               ),
                             ),
-                                             
                           ],
                         ),
                       ),
-                           Spacer(),
-                          
-                          // Terms & Conditions Text
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: padding),
-                            child: Text(
-                              "By connecting your account confirm that you agree with our Term and Condition",
-                              style: TextStyle(color: Colors.grey, fontSize: fontSize),
-                            ),
-                          ),
-                          SizedBox(height: screenHeight * 0.02),
-                          
-                          // Login Button
-                          BlocBuilder<LogIN_Cubit, LogInCubitState>(
-                            builder: (context, state) {
-                              return CustomContainer(
-                                text: "Login",
-                                onTap: () async {
-                                  if (globalKey.currentState!.validate()) {
-                                    BlocProvider.of<LogIN_Cubit>(context).submitlogin(
+                      const Spacer(),
+
+                      // Terms & Conditions Text
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: padding),
+                        child: Text(
+                          "By connecting your account confirm that you agree with our Term and Condition",
+                          style:
+                              TextStyle(color: Colors.grey, fontSize: fontSize),
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * 0.02),
+
+                      // Login Button
+                      BlocBuilder<LogIN_Cubit, LogInCubitState>(
+                        builder: (context, state) {
+                          return CustomContainer(
+                            text: "Login",
+                            onTap: () async {
+                              if (globalKey.currentState!.validate()) {
+                                BlocProvider.of<LogIN_Cubit>(context)
+                                    .submitlogin(
                                         email: userNameController.text,
                                         password: passwordController.text,
                                         rememberMe: remember);
-                                  }
-                                },
-                              );
+                              }
                             },
-                          ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),

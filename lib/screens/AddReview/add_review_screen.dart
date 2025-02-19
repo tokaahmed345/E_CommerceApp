@@ -52,7 +52,8 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
             showDialog(
               context: context,
               barrierDismissible: false,
-              builder: (context) => Center(child: CircularProgressIndicator()),
+              builder: (context) =>
+                  const Center(child: CircularProgressIndicator()),
             );
           } else if (state is AddReviewSuccess) {
             Navigator.of(context).pop(); // إغلاق الـ Dialog عند النجاح
@@ -74,7 +75,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
         builder: (context, state) {
           return Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: CustomAppBar(title: "Add Review"),
+            appBar: const CustomAppBar(title: "Add Review"),
             body: Column(
               children: [
                 Padding(
@@ -82,13 +83,27 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Name", style: TextStyle(fontSize: titleFontSize, fontWeight: FontWeight.bold)),
-                      CustomTextField(hintText: "Type your Name", controller: userNameController),
-                      SizedBox(height: screenHeight * 0.02), 
-                      Text("How Was Your Experience?", style: TextStyle(fontSize: titleFontSize, fontWeight: FontWeight.bold)),
-                      CustomTextFieldReview(num: 10, hintText: "Describe your Experience?", controller: experienceController),
+                      Text("Name",
+                          style: TextStyle(
+                              fontSize: titleFontSize,
+                              fontWeight: FontWeight.bold)),
+                      CustomTextField(
+                          hintText: "Type your Name",
+                          controller: userNameController),
                       SizedBox(height: screenHeight * 0.02),
-                      Text("Star", style: TextStyle(fontWeight: FontWeight.bold, fontSize: titleFontSize)),
+                      Text("How Was Your Experience?",
+                          style: TextStyle(
+                              fontSize: titleFontSize,
+                              fontWeight: FontWeight.bold)),
+                      CustomTextFieldReview(
+                          num: 10,
+                          hintText: "Describe your Experience?",
+                          controller: experienceController),
+                      SizedBox(height: screenHeight * 0.02),
+                      Text("Star",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: titleFontSize)),
                       CustomSlider(
                         onRatingChanged: (value) {
                           setState(() {
@@ -99,16 +114,18 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 CustomContainer(
                   text: "Submit Review",
                   onTap: () {
-                    BlocProvider.of<AddReviewCubit>(context).submitReview(
+                    BlocProvider.of<AddReviewCubit>(context)
+                        .submitReview(
                       id: id,
                       userName: userNameController.text,
                       feedBack: experienceController.text,
                       rating: rating,
-                    ).then((_) {
+                    )
+                        .then((_) {
                       BlocProvider.of<AllReviewCubit>(context).fetchData(id);
                       Navigator.of(context).pop(); // العودة إلى الشاشة السابقة
                     }).catchError((error) {

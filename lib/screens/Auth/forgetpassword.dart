@@ -4,7 +4,6 @@ import 'package:lazashopping/cubits/cubit/forgot-cubit/forgot_cubit.dart';
 import 'package:lazashopping/screens/Auth/verification%20_code.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
 import 'package:lazashopping/services/AuthServices/resetservices.dart';
-import 'package:lazashopping/widgets/customappbar.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customtextfield.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -37,7 +36,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         listener: (context, state) {
           if (state is ForgotSuccess) {
             print(state.reset.message);
-            Navigator.pushNamed(context, VerificationCode.id, arguments: emailController.text);
+            Navigator.pushNamed(context, VerificationCode.id,
+                arguments: emailController.text);
           } else if (state is ForgotFailure) {
             print(state.message);
           }
@@ -46,9 +46,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           return ModalProgressHUD(
             inAsyncCall: state is ForgotLoading,
             child: Scaffold(
-              resizeToAvoidBottomInset: false, 
+              resizeToAvoidBottomInset: false,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              appBar: const CustomAppBar(title: "",),
+              appBar: const CustomAppBar(
+                title: "",
+              ),
               body: Column(
                 children: [
                   Padding(
@@ -58,10 +60,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(height: screenHeight * 0.01), 
+                          SizedBox(height: screenHeight * 0.01),
                           Text(
                             "Forgot Password",
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: fontSize),
                           ),
                           SizedBox(height: screenHeight * 0.03),
                           Image.asset("assets/images/IMG.png"),
@@ -73,7 +77,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               validator: (email) {
                                 if (email == null || email.isEmpty) {
                                   return "Please enter your email.";
-                                } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
+                                } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
+                                    .hasMatch(email)) {
                                   return "Please enter a valid email address.";
                                 }
                                 return null;
@@ -81,28 +86,31 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: screenHeight * 0.2), // Adjust top padding dynamically
-                            child: Text(
+                            padding: EdgeInsets.only(
+                                top: screenHeight *
+                                    0.2), // Adjust top padding dynamically
+                            child: const Text(
                               "Please write your email to receive a \nconfirmation code to set a new password.",
-                              style: TextStyle(color: Colors.grey, fontSize: 21),
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 21),
                               textAlign: TextAlign.center,
                             ),
                           ),
-                        
                         ],
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomContainer(
-                        text: "Confirm Mail",
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            print("*****");
-                            BlocProvider.of<ForgotCubit>(context).forgotten(email: emailController.text);
-                          }
-                        },
-                      ),
+                    text: "Confirm Mail",
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        print("*****");
+                        BlocProvider.of<ForgotCubit>(context)
+                            .forgotten(email: emailController.text);
+                      }
+                    },
+                  ),
                 ],
               ),
             ),

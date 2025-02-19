@@ -23,30 +23,29 @@ class _Welcome_ScreenState extends State<Welcome_Screen> {
 
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.centerLeft,
-            tileMode: TileMode.mirror,
-            colors: [
-              Color(0xffB0A3E5),
-              Color(0xff7661C5),
-            ]
-          ),
+              begin: Alignment.topCenter,
+              end: Alignment.centerLeft,
+              tileMode: TileMode.mirror,
+              colors: [
+                Color(0xffB0A3E5),
+                Color(0xff7661C5),
+              ]),
         ),
         child: Stack(
           children: [
-            Positioned.fill(
+            const Positioned.fill(
               child: Image(
                 image: AssetImage("assets/images/background.png"),
-                fit: BoxFit.cover, 
+                fit: BoxFit.cover,
               ),
             ),
             Positioned(
               bottom: bottomPosition,
               right: padding,
               left: padding,
-              child: Customcard(),
+              child: const Customcard(),
             ),
           ],
         ),

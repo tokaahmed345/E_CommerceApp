@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazashopping/cubits/cubit/cartcubit/calculate_total_cubit.dart';
 import 'package:lazashopping/cubits/cubit/cartcubit/get_all_item_in_cart_cubit.dart';
 import 'package:lazashopping/helpers/helper.dart';
-import 'package:lazashopping/model/CartModel/getallitemincart.dart';
 import 'package:lazashopping/screens/Cart/addressscreen.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customaddresssection.dart';
@@ -17,14 +16,11 @@ import 'package:lazashopping/services/cartServices/getallservices.dart';
 import 'package:lazashopping/sharedpref/sharedprefrance.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lottie/lottie.dart';
-
 class CartView extends StatelessWidget {
   const CartView({super.key});
   static String id = 'cart';
-
   @override
   Widget build(BuildContext context) {
-   
     // Get screen width and height from MediaQuery
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -50,7 +46,8 @@ class CartView extends StatelessWidget {
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: const CustomAppBar(title: "Cart"),
             body: FutureBuilder<Map<String, String>>(
-              future: SharedPref.getAddress(), // Fetch saved address from SharedPreferences
+              future: SharedPref
+                  .getAddress(), // Fetch saved address from SharedPreferences
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -62,7 +59,8 @@ class CartView extends StatelessWidget {
                         child: Builder(
                           builder: (context) {
                             if (state is GetAllItemInCarLoading) {
-                              return const Center(child: CircularProgressIndicator());
+                              return const Center(
+                                  child: CircularProgressIndicator());
                             } else if (state is GetAllItemInCartFailure) {
                               return Center(
                                 child: Text(
@@ -71,25 +69,29 @@ class CartView extends StatelessWidget {
                                 ),
                               );
                             } else if (state is GetAllItemInCartSuccess) {
-                              List<dynamic> items = state.getAllItems["Items"] ?? [];
+                              List<dynamic> items =
+                                  state.getAllItems["Items"] ?? [];
 
                               if (items.isEmpty) {
                                 return Center(
                                   child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: screenHeight * 0.1),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: screenHeight * 0.1),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         SizedBox(
                                           width: screenWidth * 0.5,
-                                          child: Lottie.asset("assets/images/Animation - 1739721795829.json"),
+                                          child: Lottie.asset(
+                                              "assets/images/Animation - 1739721795829.json"),
                                         ),
                                         const SizedBox(height: 10),
                                         Text(
                                           "Cart Is Empty",
                                           style: TextStyle(
                                             fontSize: screenWidth * 0.06,
-                                            color: const Color.fromARGB(255, 133, 39, 176),
+                                            color: const Color.fromARGB(
+                                                255, 133, 39, 176),
                                           ),
                                         ),
                                       ],
@@ -99,7 +101,8 @@ class CartView extends StatelessWidget {
                               }
 
                               return ListView(
-                                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: screenWidth * 0.02),
                                 children: [
                                   ...items.map((item) => CustomCardCart(
                                         productid: item["ProductId"],
@@ -109,19 +112,24 @@ class CartView extends StatelessWidget {
                                         quantity: item["Quantity"],
                                       )),
                                   SizedBox(height: screenHeight * 0.02),
-                                  const CustomTitleCard(title: 'Delivery Address'),
+                                  const CustomTitleCard(
+                                      title: 'Delivery Address'),
                                   CustomAddressSection(
                                     onTap: () {
-                                      Navigator.pushNamed(context, AddressScreen.id);
+                                      Navigator.pushNamed(
+                                          context, AddressScreen.id);
                                     },
-                                    title: savedData['address'] ?? "Click to add address",
+                                    title: savedData['address'] ??
+                                        "Click to add address",
                                     subTitle: savedData['country'] ?? "",
                                   ),
                                   SizedBox(height: screenHeight * 0.02),
-                                  const CustomTitleCard(title: "Payment Methods"),
+                                  const CustomTitleCard(
+                                      title: "Payment Methods"),
                                   CustomListtileCard(
                                     onTap: () {
-                                      Navigator.pushNamed(context, PaymentScreen.id);
+                                      Navigator.pushNamed(
+                                          context, PaymentScreen.id);
                                     },
                                     title: "Visa Classic",
                                     subTitle: "**** 7690",
@@ -136,7 +144,8 @@ class CartView extends StatelessWidget {
                                 ],
                               );
                             } else {
-                              return const Center(child: Text("Something went wrong"));
+                              return const Center(
+                                  child: Text("Something went wrong"));
                             }
                           },
                         ),
@@ -145,15 +154,19 @@ class CartView extends StatelessWidget {
                         child: CustomContainer(
                           text: "Checkout",
                           onTap: () {
-                            final currentState = BlocProvider.of<GetAllItemInCartCubit>(context).state;
+                            final currentState =
+                                BlocProvider.of<GetAllItemInCartCubit>(context)
+                                    .state;
 
                             if (currentState is GetAllItemInCartSuccess &&
                                 currentState.getAllItems["Items"] != null &&
                                 currentState.getAllItems["Items"].isNotEmpty) {
-                              Navigator.pushNamed(context, OrderConfirmedScreen.id);
+                              Navigator.pushNamed(
+                                  context, OrderConfirmedScreen.id);
                             } else {
                               Helpers.showSnackbar(context, "No Item Found",
-                                  backgroundColor: const Color.fromARGB(255, 231, 85, 209));
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 231, 85, 209));
                             }
                           },
                         ),
@@ -161,7 +174,7 @@ class CartView extends StatelessWidget {
                     ],
                   );
                 } else {
-                  return Center(child: Text("Error: No address found"));
+                  return const Center(child: Text("Error: No address found"));
                 }
               },
             ),

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
-    super.key, required this.title,
+    super.key,
+    required this.title,
   });
   final String title;
 
@@ -10,8 +11,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    double fontSize = screenWidth * 0.06;  // تعديل المضاعف حسب الحاجة
-    double iconSize = screenWidth * 0.07;  // تعديل المضاعف حسب الحاجة
+    double fontSize = screenWidth * 0.06; // تعديل المضاعف حسب الحاجة
+    double iconSize = screenWidth * 0.07; // تعديل المضاعف حسب الحاجة
 
     return AppBar(
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -29,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         title,
         style: TextStyle(
-          fontSize: fontSize,  // تعديل حجم الخط بناءً على عرض الشاشة
+          fontSize: fontSize, // تعديل حجم الخط بناءً على عرض الشاشة
           color: Theme.of(context).appBarTheme.iconTheme!.color,
         ),
       ),

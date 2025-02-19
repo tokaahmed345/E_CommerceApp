@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazashopping/cubits/cubit/Theme/theme_cubit_cubit.dart';
-import 'package:lazashopping/screens/Auth/login.dart';
 import 'package:lazashopping/screens/drawersScreens/account_Info.dart';
 import 'package:lazashopping/screens/drawersScreens/display_Password.dart';
-import 'package:lazashopping/screens/started_screen.dart';
 import 'package:lazashopping/screens/welcomescreen.dart';
 import 'package:lazashopping/screens/wishlist/wishlist.dart';
 import 'package:lazashopping/sharedpref/sharedprefrance.dart';
@@ -27,7 +25,7 @@ class CustomColumnDrawer extends StatelessWidget {
     return Column(
       children: [
         DrawerHeader(
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Padding(
             padding: EdgeInsets.only(bottom: screenHeight * 0.1), // Adjust bottom padding
             child: Row(
@@ -39,7 +37,7 @@ class CustomColumnDrawer extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(Icons.menu),
+                    icon: const Icon(Icons.menu),
                   ),
                 ),
               ],
@@ -49,7 +47,7 @@ class CustomColumnDrawer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(Icons.person, color: const Color.fromARGB(255, 124, 58, 222), size: 30),
+            const Icon(Icons.person, color: Color.fromARGB(255, 124, 58, 222), size: 30),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -98,7 +96,7 @@ class CustomColumnDrawer extends StatelessWidget {
               child: Icon(Icons.wb_sunny_outlined, size: iconSize),
             ),
             Text("Dark Mode", style: TextStyle(fontSize: fontSizeItem)),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: Switch(
@@ -113,8 +111,8 @@ class CustomColumnDrawer extends StatelessWidget {
         CustomItemInDrawer(text: "Account Information", icon: Icons.info_outline, onTap: () { Navigator.pushNamed(context, AccountInfoScreen.id); }),
         CustomItemInDrawer(text: "Password", icon: Icons.lock_outline, onTap: () { Navigator.pushNamed(context, DisplayPasswordScreen.id); }),
         CustomItemInDrawer(text: "Wishlist", icon: Icons.favorite_outline, onTap: () { Navigator.pushNamed(context, WishListScreen.id); }),
-        CustomItemInDrawer(text: "Settings", icon: Icons.settings_outlined),
-        Spacer(),
+        // CustomItemInDrawer(text: "Settings", icon: Icons.settings_outlined),
+        const Spacer(),
         CustomItemInDrawer(
           text: "Log Out",
           icon: Icons.logout,

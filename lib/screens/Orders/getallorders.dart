@@ -88,8 +88,8 @@ class GetOrders extends StatelessWidget {
             //       }),
             // )
             Lottie.asset("assets/images/Animation - 1739745126049.json"),
-            SizedBox(height: 40,)
-,            Text("No orders Available ,Order Now ",style: TextStyle(fontSize: 22,  color: const Color.fromARGB(
+            const SizedBox(height: 40,)
+,            const Text("No orders Available ,Order Now ",style: TextStyle(fontSize: 22,  color: Color.fromARGB(
                                         255, 133, 39, 176)),)
           ],
         ),

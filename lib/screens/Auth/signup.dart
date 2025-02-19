@@ -16,8 +16,9 @@ class SignUp extends StatefulWidget {
   @override
   State<SignUp> createState() => _SignUpState();
 }
+
 class _SignUpState extends State<SignUp> {
-      GlobalKey<FormState> globalKey = GlobalKey();
+  GlobalKey<FormState> globalKey = GlobalKey();
   RegisterServices reg = RegisterServices();
   bool isShow = false;
   bool remember = false;
@@ -27,7 +28,6 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
       create: (context) => RegistrationCubit(registered: RegisterServices()),
       child: BlocConsumer<RegistrationCubit, RegistrationState>(
@@ -37,23 +37,27 @@ class _SignUpState extends State<SignUp> {
             print(state.register.message);
             Navigator.pushNamed(context, LoginScreen.id);
           } else if (state is RegistrationFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
           } else if (state is RegistrationLoading) {
-            Center(child: CircularProgressIndicator());
+            const Center(child: CircularProgressIndicator());
           }
         },
         builder: (context, state) {
           return Scaffold(
-            resizeToAvoidBottomInset:  false,
-            appBar: CustomAppBar(title: ""),
+            resizeToAvoidBottomInset: false,
+            appBar: const CustomAppBar(title: ""),
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             body: Column(
               children: [
                 Form(
                   key: globalKey,
                   child: Padding(
-                    padding:  EdgeInsets.symmetric(  horizontal: MediaQuery.of(context).size.width * 0.05,  // Responsive horizontal padding
-                vertical: MediaQuery.of(context).size.height * 0.05,  ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width *
+                          0.05, // Responsive horizontal padding
+                      vertical: MediaQuery.of(context).size.height * 0.05,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -61,17 +65,22 @@ class _SignUpState extends State<SignUp> {
                           child: Text(
                             "Sign Up",
                             style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width * 0.1,  // Responsive font size
+                              fontSize: MediaQuery.of(context).size.width *
+                                  0.1, // Responsive font size
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                        
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.03),
+
                         // User Name Section
                         Text(
                           "UserName",
-                          style: TextStyle(color: Colors.grey, fontSize: MediaQuery.of(context).size.width * 0.05),
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.05),
                         ),
                         CustomTextField(
                           controller: UserNameController,
@@ -82,12 +91,16 @@ class _SignUpState extends State<SignUp> {
                               return null;
                           },
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                                        
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.03),
+
                         // Email Address Section
                         Text(
                           "Email Address",
-                          style: TextStyle(color: Colors.grey, fontSize: MediaQuery.of(context).size.width * 0.05),
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.05),
                         ),
                         CustomTextField(
                           controller: emailController,
@@ -98,12 +111,16 @@ class _SignUpState extends State<SignUp> {
                               return null;
                           },
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                                        
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.03),
+
                         // Password Section
                         Text(
                           "Password",
-                          style: TextStyle(color: Colors.grey, fontSize: MediaQuery.of(context).size.width * 0.05),
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.05),
                         ),
                         Stack(
                           children: [
@@ -124,7 +141,9 @@ class _SignUpState extends State<SignUp> {
                                   isShow = !isShow;
                                 });
                               },
-                              icon: isShow ? Icons.visibility : Icons.visibility_off,
+                              icon: isShow
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                             ),
                             isShow
                                 ? Padding(
@@ -136,14 +155,18 @@ class _SignUpState extends State<SignUp> {
                                         child: Container(
                                           height: 50,
                                           width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: Color.fromARGB(255, 205, 98, 255),
+                                          decoration: const BoxDecoration(
+                                            color: Color.fromARGB(
+                                                255, 205, 98, 255),
                                           ),
-                                          padding: const EdgeInsets.only(left: 10),
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
                                           alignment: Alignment.centerLeft,
                                           child: Text(
                                             passwordController.text,
-                                            style: TextStyle(color: Colors.black, fontSize: 20),
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20),
                                           ),
                                         ),
                                       ),
@@ -152,19 +175,26 @@ class _SignUpState extends State<SignUp> {
                                 : Container(),
                           ],
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                                        
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.03),
+
                         // Remember Me Section
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.02),
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.02),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 "Remember me",
                                 style: TextStyle(
-                                  color: Theme.of(context).appBarTheme.titleTextStyle!.color,
-                                  fontSize: MediaQuery.of(context).size.width * 0.05,
+                                  color: Theme.of(context)
+                                      .appBarTheme
+                                      .titleTextStyle!
+                                      .color,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.05,
                                 ),
                               ),
                               Switch(
@@ -179,27 +209,27 @@ class _SignUpState extends State<SignUp> {
                             ],
                           ),
                         ),
-                                        
+
                         // Submit Button Section
-                    
                       ],
                     ),
                   ),
                 ),
-Spacer(),
-                  CustomContainer(
-                          text: "Sign Up",
-                          onTap: () {
-                            if (globalKey.currentState!.validate()) {
-                              BlocProvider.of<RegistrationCubit>(context).submitRegistration(
-                                userName: UserNameController.text,
-                                email: emailController.text,
-                                password: passwordController.text,
-                                remember: remember,
-                              );
-                            }
-                          },
-                        ),
+                const Spacer(),
+                CustomContainer(
+                  text: "Sign Up",
+                  onTap: () {
+                    if (globalKey.currentState!.validate()) {
+                      BlocProvider.of<RegistrationCubit>(context)
+                          .submitRegistration(
+                        userName: UserNameController.text,
+                        email: emailController.text,
+                        password: passwordController.text,
+                        remember: remember,
+                      );
+                    }
+                  },
+                ),
               ],
             ),
           );
@@ -208,5 +238,3 @@ Spacer(),
     );
   }
 }
-
-

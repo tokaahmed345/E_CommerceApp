@@ -3,7 +3,8 @@ import 'package:lazashopping/model/WishListModel/getallwishlist.dart';
 
 class CustomInfoWishlist extends StatelessWidget {
   const CustomInfoWishlist({
-    super.key, required this.wishlist,
+    super.key,
+    required this.wishlist,
   });
   final List<GetAllUserWishList> wishlist;
 
@@ -11,7 +12,7 @@ class CustomInfoWishlist extends StatelessWidget {
   Widget build(BuildContext context) {
     // Get the screen width
     double screenWidth = MediaQuery.of(context).size.width;
-    
+
     // Adjust layout for smaller screens
     bool isSmallScreen = screenWidth < 600;
 
@@ -36,7 +37,7 @@ class CustomInfoWishlist extends StatelessWidget {
                   "in wishlist",
                   style: TextStyle(
                     color: Colors.grey,
-                    fontSize: isSmallScreen ? 17: 20,
+                    fontSize: isSmallScreen ? 17 : 20,
                   ),
                 ),
               ),

@@ -14,7 +14,6 @@ class SummaryOrderInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     // Get screen width and height from MediaQuery
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
 
     return BlocProvider(
       create: (context) => CalculateTotalCubit()..updateTotal(items),
@@ -24,7 +23,8 @@ class SummaryOrderInfo extends StatelessWidget {
             return Card(
               color: Theme.of(context).cardColor,
               child: Padding(
-                padding: EdgeInsets.all(screenWidth * 0.03), // Adjust padding based on screen width
+                padding: EdgeInsets.all(
+                    screenWidth * 0.03), // Adjust padding based on screen width
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -32,11 +32,11 @@ class SummaryOrderInfo extends StatelessWidget {
                       label: "Subtotal",
                       value: "\$${state.subtotal.toStringAsFixed(2)}",
                     ),
-                    CustomOrderSection(
+                    const CustomOrderSection(
                       label: "ShippingCost",
                       value: "\$10",
                     ),
-                    Divider(),
+                    const Divider(),
                     CustomOrderSection(
                       label: "Total",
                       value: "\$${(state.subtotal + 10).toStringAsFixed(2)}",
@@ -47,7 +47,7 @@ class SummaryOrderInfo extends StatelessWidget {
               ),
             );
           }
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

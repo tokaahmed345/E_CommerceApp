@@ -4,7 +4,6 @@ import 'package:lazashopping/cubits/cubit/update-cubit/update_password_cubit.dar
 import 'package:lazashopping/screens/Auth/login.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
 import 'package:lazashopping/services/AuthServices/updateservices.dart';
-import 'package:lazashopping/widgets/customappbar.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customtextfield.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -42,7 +41,7 @@ class NewPassword_Screan extends StatelessWidget {
             child: Scaffold(
               resizeToAvoidBottomInset: false,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              appBar: CustomAppBar(title: ""),
+              appBar: const CustomAppBar(title: ""),
               body: LayoutBuilder(
                 builder: (context, constraints) {
                   // Use constraints to adapt layout
@@ -120,7 +119,7 @@ class NewPassword_Screan extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Padding(
                         padding: EdgeInsets.only(top: screenHeight * 0.1),
                         child: BlocBuilder<UpdatePasswordCubit,
@@ -133,7 +132,7 @@ class NewPassword_Screan extends StatelessWidget {
                                   if (passwordController.text !=
                                       confirmPasswordController.text) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                      const SnackBar(
                                           content:
                                               Text("Passwords do not match")),
                                     );

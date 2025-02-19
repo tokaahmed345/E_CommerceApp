@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lazashopping/cubits/cubit/wishist/wish_list_cubit.dart';
-import 'package:lazashopping/model/ProductModel/product.dart';
 import 'package:lazashopping/screens/Cart/cart-screen.dart';
 import 'package:lazashopping/screens/Homepage/customwidget/custombottomnavigatio.dart';
 import 'package:lazashopping/screens/Homepage/customwidget/customcolumndrawer.dart';
-import 'package:lazashopping/screens/Category/customwidgets/customgridview.dart';
-import 'package:lazashopping/services/productservices/productservcies.dart';
+import 'package:lazashopping/screens/homepage/customwidget/custom_ProductFutureHome.dart';
 import 'package:lazashopping/widgets/customsearch.dart';
 import 'package:lazashopping/widgets/listviewhomecategory.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   static String id = "homescreen";
-
   @override
   Widget build(BuildContext context) {
     // Get screen width and height for responsive design
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     double fontSizeTitle = screenWidth * 0.09; // Title font size
     double fontSizeSubTitle = screenWidth * 0.06; // Subtitle font size
     double iconSize = screenWidth * 0.08; // Icon size
@@ -26,7 +20,6 @@ class HomeScreen extends StatelessWidget {
 
     final TextEditingController controller = TextEditingController();
     final GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
-    ProductServces pro = ProductServces();
 
     return Scaffold(
       key: globalKey,
@@ -46,97 +39,70 @@ class HomeScreen extends StatelessWidget {
                     globalKey.currentState?.openDrawer();
                   },
                 ),
-                IconButton(icon: Icon(Icons.shopping_bag_outlined, size: iconSize),onPressed: (){Navigator.pushNamed(context, CartView.id);},),
+                IconButton(
+                  icon: Icon(Icons.shopping_bag_outlined, size: iconSize),
+                  onPressed: () {
+                    Navigator.pushNamed(context, CartView.id);
+                  },
+                ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               "Hello",
-              style: TextStyle(fontSize: fontSizeTitle, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: fontSizeTitle, fontWeight: FontWeight.bold),
             ),
             Text(
               "Welcome to Laza",
               style: TextStyle(color: Colors.grey, fontSize: fontSizeSubTitle),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             CustomSearch(controller: controller),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               "Choose Brand",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSizeSubTitle),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: fontSizeSubTitle),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            ListViewHomeCategory(),
-            SizedBox(height: 18),
+            const ListViewHomeCategory(),
+            const SizedBox(height: 18),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "New Arrival",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSizeSubTitle),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: fontSizeSubTitle),
                 ),
                 Text(
                   "View All",
-                  style: TextStyle(color: Colors.grey, fontSize: fontSizeSubTitle * 0.8),
+                  style: TextStyle(
+                      color: Colors.grey, fontSize: fontSizeSubTitle * 0.8),
                 )
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             CustomFutureHomeProduct()
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
       drawer: Drawer(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: padding),
-          child: CustomColumnDrawer(),
+          child: const CustomColumnDrawer(),
         ),
       ),
-    );
-  }
-}
-
-class CustomFutureHomeProduct extends StatelessWidget {
-  CustomFutureHomeProduct({super.key});
-  final ProductServces pro = ProductServces();
-
-  Future<List<Product>> getProduct() {
-    return pro.getdata();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<List<Product>>(
-      future: getProduct(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          var result = snapshot.data;
-          if (result == null || result.isEmpty) {
-            return Center(
-              child: Text(
-                "No data available",
-                style: TextStyle(color: Colors.red),
-              ),
-            );
-          }
-          return CustomGridView(products: result!);
-        } else if (snapshot.hasError) {
-          return Center(child: Text("Error: ${snapshot.error}"));
-        } else if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else {
-          return Center(child: Text("No data available"));
-        }
-      },
     );
   }
 }

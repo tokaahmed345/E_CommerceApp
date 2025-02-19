@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lazashopping/model/Categorymodel/categoryModel.dart';
-import 'package:lazashopping/model/ProductModel/product.dart';
 import 'package:lazashopping/screens/Category/categoryhome.dart';
 import 'package:lazashopping/widgets/customhomecategory.dart';
 
@@ -8,7 +7,6 @@ class ListViewHomeCategory extends StatelessWidget {
 const ListViewHomeCategory({super.key});
   @override
   Widget build(BuildContext context) {
-    Product product=Product();
     final List<CategoryModel> category=[
 CategoryModel(title: "Adidas", image: "assets/images/Adidas.png", id: "1"),
 CategoryModel(title: "Nike", image: "assets/images/nike.jpg", id: "2"),

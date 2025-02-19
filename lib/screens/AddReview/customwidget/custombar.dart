@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class Custombar extends StatelessWidget {
   const Custombar({
-    super.key, required this.title, required this.number,
+    super.key,
+    required this.title,
+    required this.number,
   });
   final String title;
   final double number;
@@ -10,10 +12,9 @@ class Custombar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
 
-    double paddingValue = screenWidth * 0.05; 
-    double titleFontSize = screenWidth < 400 ? 25 : 35; 
+    double paddingValue = screenWidth * 0.05;
+    double titleFontSize = screenWidth < 400 ? 25 : 35;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,7 +30,7 @@ class Custombar extends StatelessWidget {
             },
             icon: Icon(
               Icons.arrow_back_ios,
-              size: screenWidth < 400 ? 20 : 25, 
+              size: screenWidth < 400 ? 20 : 25,
             ),
           ),
         ),

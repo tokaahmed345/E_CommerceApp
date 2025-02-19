@@ -19,12 +19,12 @@ final  void Function()? onTap;
         color: Theme.of(context).cardColor,
 
         child: ListTile(
-          leading: Icon(Icons.location_on, color: Colors.orange),
+          leading: const Icon(Icons.location_on, color: Colors.orange),
           title: Text(title),
           subtitle: Text(subTitle),
-trailing: (title == null || title.isEmpty || title == "Click to add address")
-              ? SizedBox() 
-              : Icon(Icons.check_circle, color: Colors.green),        ),
+trailing: (title.isEmpty || title == "Click to add address")
+              ? const SizedBox() 
+              : const Icon(Icons.check_circle, color: Colors.green),        ),
       ),
     );
   }

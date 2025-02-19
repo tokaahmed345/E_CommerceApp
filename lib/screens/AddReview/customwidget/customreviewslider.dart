@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomSlider extends StatefulWidget {
-  final Function(double) onRatingChanged; 
+  final Function(double) onRatingChanged;
   const CustomSlider({super.key, required this.onRatingChanged});
 
   @override
@@ -15,21 +15,20 @@ class _CustomSliderState extends State<CustomSlider> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    double textFontSize = screenWidth < 400 ? 14 : 18; 
+    double textFontSize = screenWidth < 400 ? 14 : 18;
 
-    double sliderWidth = screenWidth * 0.7; 
+    double sliderWidth = screenWidth * 0.7;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           "${rating.toStringAsFixed(1)}",
-          style: TextStyle(fontSize: textFontSize), 
+          style: TextStyle(fontSize: textFontSize),
         ),
-        
         Expanded(
           child: Container(
-            width: sliderWidth, 
+            width: sliderWidth,
             child: SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 valueIndicatorColor: const Color.fromARGB(255, 92, 81, 161),
@@ -42,9 +41,9 @@ class _CustomSliderState extends State<CustomSlider> {
                 label: " ${rating.toStringAsFixed(1)}",
                 onChanged: (double value) {
                   setState(() {
-                    rating = value; 
+                    rating = value;
                   });
-                  widget.onRatingChanged(value); 
+                  widget.onRatingChanged(value);
                 },
               ),
             ),

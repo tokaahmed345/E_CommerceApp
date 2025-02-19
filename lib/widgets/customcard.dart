@@ -18,7 +18,6 @@ class _CustomcardState extends State<Customcard> {
   Widget build(BuildContext context) {
     // Get the screen width and height for responsive design
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     
     // Adjust padding and font sizes based on screen size
     double padding = screenWidth < 600 ? 16.0 : 26.0;

@@ -23,7 +23,7 @@ class CustomInfoBody extends StatefulWidget {
 }
 
 class _CustomInfoBodyState extends State<CustomInfoBody> {
-  bool _showFullDescription = false; 
+  bool _showFullDescription = false;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,8 @@ class _CustomInfoBodyState extends State<CustomInfoBody> {
                 child: Text(
                   widget.itemdetails.name ?? "SportProduct",
                   style: TextStyle(
-                      color: Colors.grey, fontSize: 19 * widget.textScaleFactor),
+                      color: Colors.grey,
+                      fontSize: 19 * widget.textScaleFactor),
                 ),
               ),
               Text(
@@ -71,7 +72,8 @@ class _CustomInfoBodyState extends State<CustomInfoBody> {
             ],
           ),
           SizedBox(
-            height: widget.screenHeight * 0.09, // Dynamic height for images based on screen height
+            height: widget.screenHeight *
+                0.09, // Dynamic height for images based on screen height
             child: ListView.builder(
               itemCount: widget.itemdetails.images!.length,
               scrollDirection: Axis.horizontal,
@@ -103,8 +105,8 @@ class _CustomInfoBodyState extends State<CustomInfoBody> {
               ),
             ],
           ),
-          CustomRowSizeSection(),
-          SizedBox(
+          const CustomRowSizeSection(),
+          const SizedBox(
             height: 5,
           ),
           Column(
@@ -116,16 +118,16 @@ class _CustomInfoBodyState extends State<CustomInfoBody> {
                     fontWeight: FontWeight.bold,
                     fontSize: 22 * widget.textScaleFactor),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text.rich(TextSpan(children: [
                 TextSpan(
-                  text: _showFullDescription
-                      ? description
-                      : truncatedDescription,
+                  text:
+                      _showFullDescription ? description : truncatedDescription,
                   style: TextStyle(
-                      fontSize: 20 * widget.textScaleFactor, color: Colors.grey),
+                      fontSize: 20 * widget.textScaleFactor,
+                      color: Colors.grey),
                 ),
                 TextSpan(
                   text: _showFullDescription ? " Show Less" : " Read More",
@@ -142,7 +144,7 @@ class _CustomInfoBodyState extends State<CustomInfoBody> {
               ])),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
@@ -162,18 +164,20 @@ class _CustomInfoBodyState extends State<CustomInfoBody> {
                 child: Text(
                   "View All",
                   style: TextStyle(
-                      color: Colors.grey, fontSize: 20 * widget.textScaleFactor),
+                      color: Colors.grey,
+                      fontSize: 20 * widget.textScaleFactor),
                 ),
               ),
             ],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: (widget.itemdetails.reviews != null && widget.itemdetails.reviews!.isNotEmpty)
+            child: (widget.itemdetails.reviews != null &&
+                    widget.itemdetails.reviews!.isNotEmpty)
                 ? ReviewSection(info: widget.itemdetails.reviews!.first)
-                : SizedBox(),
+                : const SizedBox(),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Padding(

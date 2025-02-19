@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lazashopping/cubits/cubit/cartcubit/calculate_total_cubit.dart';
 import 'package:lazashopping/cubits/cubit/cartcubit/get_all_item_in_cart_cubit.dart';
 import 'package:lazashopping/cubits/cubit/cartcubit/quantity_control_cubit.dart';
 import 'package:lazashopping/services/cartServices/delete_item_by_id.dart';
@@ -30,13 +29,16 @@ class CustomCardCart extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 5,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical:  MediaQuery.of(context).size.width * 0.02),
+          padding: EdgeInsets.symmetric(
+              vertical: MediaQuery.of(context).size.width * 0.02),
           child: Row(
             children: [
               Image.network(
                 "https://laza.runasp.net/$productImage", // تأكد من مسار الصورة الصحيح
-                width: MediaQuery.of(context).size.width * 0.3, // Make image responsive
-                height: MediaQuery.of(context).size.height * 0.1, // Make image responsive
+                width: MediaQuery.of(context).size.width *
+                    0.3, // Make image responsive
+                height: MediaQuery.of(context).size.height *
+                    0.1, // Make image responsive
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.03),
               Expanded(
@@ -47,14 +49,16 @@ class CustomCardCart extends StatelessWidget {
                       productName,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.width * 0.04, // Make font size responsive
+                        fontSize: MediaQuery.of(context).size.width *
+                            0.04, // Make font size responsive
                       ),
                     ),
                     Text(
                       "\$$price",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.width * 0.04, // Make font size responsive
+                        fontSize: MediaQuery.of(context).size.width *
+                            0.04, // Make font size responsive
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.01),
@@ -70,10 +74,11 @@ class CustomCardCart extends StatelessWidget {
                               child: CircleAvatar(
                                 backgroundColor: Theme.of(context).cardColor,
                                 child: IconButton(
-                                  icon: Icon(Icons.keyboard_arrow_up,
+                                  icon: const Icon(Icons.keyboard_arrow_up,
                                       color: Colors.grey),
                                   onPressed: () {
-                                    BlocProvider.of<QuantityControlCubit>(context)
+                                    BlocProvider.of<QuantityControlCubit>(
+                                            context)
                                         .increaseQuantity();
                                   },
                                 ),
@@ -81,11 +86,13 @@ class CustomCardCart extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: MediaQuery.of(context).size.width * 0.03),
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.03),
                               child: Text(
                                 state.quantity.toString(),
                                 style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.width * 0.04, // Make font size responsive
+                                  fontSize: MediaQuery.of(context).size.width *
+                                      0.04, // Make font size responsive
                                 ),
                               ),
                             ),
@@ -97,24 +104,27 @@ class CustomCardCart extends StatelessWidget {
                               child: CircleAvatar(
                                 backgroundColor: Theme.of(context).cardColor,
                                 child: IconButton(
-                                  icon: Icon(Icons.keyboard_arrow_down,
+                                  icon: const Icon(Icons.keyboard_arrow_down,
                                       color: Colors.grey),
                                   onPressed: () {
-                                    BlocProvider.of<QuantityControlCubit>(context)
+                                    BlocProvider.of<QuantityControlCubit>(
+                                            context)
                                         .decreaceQuantity();
                                   },
                                 ),
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             IconButton(
-                              icon: Icon(Icons.delete_outline, color: Colors.grey),
+                              icon: const Icon(Icons.delete_outline,
+                                  color: Colors.grey),
                               onPressed: () async {
                                 await DeleteItemByIdServices()
                                     .deleteItemById(id: productid);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    backgroundColor: const Color.fromARGB(255, 231, 85, 209),
+                                  const SnackBar(
+                                    backgroundColor:
+                                        Color.fromARGB(255, 231, 85, 209),
                                     content: Text("Item removed SuccessFully"),
                                   ),
                                 );

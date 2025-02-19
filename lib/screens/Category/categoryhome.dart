@@ -15,7 +15,8 @@ class CategoryHome extends StatelessWidget {
 
     // Get screen width for responsive design
     double screenWidth = MediaQuery.of(context).size.width;
-    bool isSmallScreen = screenWidth < 600; // Define small screen for responsiveness
+    bool isSmallScreen =
+        screenWidth < 600; // Define small screen for responsiveness
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -30,19 +31,19 @@ class CategoryHome extends StatelessWidget {
               color: Theme.of(context).appBarTheme.iconTheme!.color,
             )),
         elevation: 0,
-       
       ),
       body: Padding(
-        padding: EdgeInsets.all(isSmallScreen ? 8.0 : 16.0), // Adjust padding based on screen size
+        padding: EdgeInsets.all(
+            isSmallScreen ? 8.0 : 16.0), // Adjust padding based on screen size
         child: FutureBuilder<List<Product>>(
           future: productServces.getCategory(id: productCategory),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text("Error: ${snapshot.error}"));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: Text("No products found"));
+              return const Center(child: Text("No products found"));
             } else {
               List<Product> productCategoryId = snapshot.data!;
               return SingleChildScrollView(

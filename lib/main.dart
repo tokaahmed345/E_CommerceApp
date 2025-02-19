@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, state) {
           return MaterialApp(
+           
             debugShowCheckedModeBanner: false,
             theme: AppTheme.themeLight,
             darkTheme: AppTheme.darkTheme,
@@ -73,10 +74,10 @@ class MyApp extends StatelessWidget {
               AccountInfoScreen.id:(context)=>AccountInfoScreen()
             },
             initialRoute:
-                 SplashScreen.id
-                // SharedPref.getToken() == null
-                //     ? SplashScreen.id
-                //     : HomeScreen.id,
+                 //SplashScreen.id
+                SharedPref.getToken() == null
+                    ? SplashScreen.id
+                    : HomeScreen.id,
           );
         },
       ),

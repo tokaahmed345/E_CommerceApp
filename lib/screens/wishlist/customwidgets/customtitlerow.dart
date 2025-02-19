@@ -25,15 +25,15 @@ class CustomWishListTitleRow extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
             ),
           ),
           isSmallScreen
-              ? Text(
+              ? const Text(
                   "Wishlist",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 )
-              : Text(
+              : const Text(
                   "Wishlist",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                 ),
@@ -42,7 +42,7 @@ class CustomWishListTitleRow extends StatelessWidget {
             backgroundColor: Colors.white,
             child: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.shopping_bag_outlined, color: Colors.black),
+              icon: const Icon(Icons.shopping_bag_outlined, color: Colors.black),
             ),
           ),
         ],

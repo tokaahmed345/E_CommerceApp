@@ -10,17 +10,15 @@ import 'package:lazashopping/widgets/customratingbar.dart';
 class ReviewsScreen extends StatelessWidget {
   const ReviewsScreen({super.key});
   static String id = "ReviewScreen";
-
   @override
   Widget build(BuildContext context) {
     final String productId =
         ModalRoute.of(context)!.settings.arguments as String;
     final AllReviewServces reviewServices = AllReviewServces();
-
     return BlocProvider(
       create: (context) => AllReviewCubit(reviewServices)..fetchData(productId),
       child: Scaffold(
-        appBar: CustomAppBar(title: "Reviews"),
+        appBar: const CustomAppBar(title: "Reviews"),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: SingleChildScrollView(
           child: Padding(
@@ -46,8 +44,8 @@ class ReviewsScreen extends StatelessWidget {
                           return Text("Loading...",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.05));
+                                  fontSize: MediaQuery.of(context).size.width *
+                                      0.05));
                         } else if (state is ReviewSuccess) {
                           int reviewCount = state.reviews.length;
                           double averageRating = state.reviews
@@ -65,13 +63,14 @@ class ReviewsScreen extends StatelessWidget {
                               Row(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Text(
                                       averageRating.toStringAsFixed(1),
                                       style: TextStyle(
-                                          fontSize:
-                                              MediaQuery.of(context).size.width *
-                                                  0.05),
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05),
                                     ),
                                   ),
                                   CustomRatingBar(rating: averageRating),
@@ -82,31 +81,31 @@ class ReviewsScreen extends StatelessWidget {
                         } else {
                           return Text("No reviews yet.",
                               style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.02));
+                                  fontSize: MediaQuery.of(context).size.width *
+                                      0.02));
                         }
                       },
                     ),
                     Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Color(0xffff7043),
-                        border: Border.all(width: 2, color: Color(0xffff7043)),
+                        color: const Color(0xffff7043),
+                        border: Border.all(
+                            width: 2, color: const Color(0xffff7043)),
                       ),
                       child: InkWell(
                         onTap: () {
-
                           Navigator.pushNamed(context, AddReviewScreen.id,
                                   arguments: productId)
-                              .then((_) => BlocProvider.of<AllReviewCubit>(
-                                      context)
-                                  .fetchData(productId)); // التحديث هنا
+                              .then((_) =>
+                                  BlocProvider.of<AllReviewCubit>(context)
+                                      .fetchData(productId)); 
                         },
                         child: Row(
                           children: [
-                            Padding(
-                                padding: const EdgeInsets.all(5.0),
+                            const Padding(
+                                padding: EdgeInsets.all(5.0),
                                 child: Icon(Icons.reviews_outlined,
                                     color: Colors.white)),
                             Padding(
@@ -124,7 +123,7 @@ class ReviewsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 BlocConsumer<AllReviewCubit, AllReviewState>(
                   listener: (context, state) {
                     if (state is ReviewFailure) {
@@ -135,7 +134,7 @@ class ReviewsScreen extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is ReviewLoading) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     } else if (state is ReviewSuccess) {
                       var data = state.reviews;
                       return Padding(
@@ -151,7 +150,7 @@ class ReviewsScreen extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return Center(child: Text("No reviews found."));
+                      return const Center(child: Text("No reviews found."));
                     }
                   },
                 ),

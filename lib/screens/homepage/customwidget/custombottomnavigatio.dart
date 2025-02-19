@@ -48,24 +48,24 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         BottomNavigationBarItem(
           label: "Home",
           icon: selectedIndex == 0
-              ? SizedBox.shrink()
+              ? const SizedBox.shrink()
               : Icon(Icons.home_outlined, size: iconSize),
         ),
         BottomNavigationBarItem(
           icon: selectedIndex == 1
-              ? SizedBox.shrink()
+              ? const SizedBox.shrink()
               : Icon(Icons.favorite_outline, size: iconSize),
           label: "Wishlist",
         ),
         BottomNavigationBarItem(
           icon: selectedIndex == 2
-              ? SizedBox.shrink()
+              ? const SizedBox.shrink()
               : Icon(Icons.credit_card, size: iconSize),
           label: "Card",
         ),
         BottomNavigationBarItem(
           icon: selectedIndex == 3
-              ? SizedBox.shrink()
+              ? const SizedBox.shrink()
               : Icon(Icons.shopping_bag_outlined, size: iconSize),
           label: "Order",
         ),

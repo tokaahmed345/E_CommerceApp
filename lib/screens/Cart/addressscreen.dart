@@ -12,8 +12,8 @@ static String id="adressscreen";
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
       resizeToAvoidBottomInset: false,
-appBar: CustomAppBar(title: "Adress"),
-body: CustomColumnAdreesBody(),
+appBar: const CustomAppBar(title: "Adress"),
+body: const CustomColumnAdreesBody(),
     );
   }
 }

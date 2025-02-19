@@ -16,7 +16,7 @@ class OrderConfirmedScreen extends StatelessWidget {
     double fontSizeTitle = screenWidth * 0.08; // Title font size
     double fontSizeSubTitle = screenWidth * 0.05; // Subtitle font size
     double containerPadding = screenWidth * 0.05; // Padding for containers
-    double textPadding = screenWidth * 0.04; // Padding for text elements
+    // double textPadding = screenWidth * 0.04; // Padding for text elements
 
     return Scaffold(
       appBar: AppBar(
@@ -87,7 +87,7 @@ class OrderConfirmedScreen extends StatelessWidget {
               ],
             ),
           ),
-         Spacer(),
+         const Spacer(),
                 CustomContainer(
                   text: "Continue Shopping",
                   onTap: () {

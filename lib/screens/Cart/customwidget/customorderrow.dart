@@ -18,7 +18,8 @@ class CustomOrderSection extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: screenWidth * 0.01), // Make padding responsive
+      padding: EdgeInsets.symmetric(
+          vertical: screenWidth * 0.01), // Make padding responsive
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

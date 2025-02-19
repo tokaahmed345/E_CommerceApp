@@ -7,7 +7,6 @@ import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
 import 'package:lazashopping/screens/Homepage/homescreen.dart';
 import 'package:lazashopping/screens/Auth/login.dart';
 import 'package:lazashopping/screens/Auth/signup.dart';
-import 'package:lazashopping/widgets/customappbar.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/widgets/customrectanglebutton.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -61,7 +60,7 @@ class _StartedScreenState extends State<StartedScreen> {
       inAsyncCall: isLoading,
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           title: "",
         ),
         body: Column(
@@ -95,7 +94,7 @@ class _StartedScreenState extends State<StartedScreen> {
                       },
                       text: "FaceBook",
                       icon: Icons.facebook,
-                      background: Color(0xff4267b2),
+                      background: const Color(0xff4267b2),
                     ),
                   ),
                   Padding(
@@ -126,7 +125,7 @@ class _StartedScreenState extends State<StartedScreen> {
                 ],
               ),
             ),
-SizedBox(height: MediaQuery.of(context).size.height * 0.33),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.33),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, LoginScreen.id);
@@ -141,14 +140,12 @@ SizedBox(height: MediaQuery.of(context).size.height * 0.33),
                 TextSpan(
                     text: "LOGIN",
                     style: TextStyle(
-                        color: Theme.of(context)
-                            .appBarTheme
-                            .titleTextStyle!
-                            .color,
+                        color:
+                            Theme.of(context).appBarTheme.titleTextStyle!.color,
                         fontSize: isSmallScreen ? 16 : 20))
               ])),
             ),
-            Spacer(),
+            const Spacer(),
             CustomContainer(
                 text: "Go To Registration",
                 onTap: () {

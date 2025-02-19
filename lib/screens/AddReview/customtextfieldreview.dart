@@ -17,7 +17,6 @@ class CustomTextFieldReview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
 
     double padding = screenWidth < 400 ? 1.0 : 3.0;
     double fontSize = screenWidth < 400 ? 14.0 : 16.0;
@@ -34,10 +33,10 @@ class CustomTextFieldReview extends StatelessWidget {
           hintStyle: TextStyle(color: Colors.grey, fontSize: fontSize),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.grey)),
+              borderSide: const BorderSide(color: Colors.grey)),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.grey)),
+              borderSide: const BorderSide(color: Colors.grey)),
         ),
       ),
     );

@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +5,6 @@ import 'package:lazashopping/cubits/cubit/verfication-cubit/verfication_cubit.da
 import 'package:lazashopping/screens/Auth/newpassword.dart';
 import 'package:lazashopping/screens/Cart/customwidget/customAppbar.dart';
 import 'package:lazashopping/services/AuthServices/verficationservices.dart';
-import 'package:lazashopping/widgets/customappbar.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -17,6 +15,7 @@ class VerificationCode extends StatefulWidget {
   @override
   State<VerificationCode> createState() => _VerificationCodeState();
 }
+
 class _VerificationCodeState extends State<VerificationCode> {
   GlobalKey<FormState> key = GlobalKey();
   List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
@@ -30,26 +29,27 @@ class _VerificationCodeState extends State<VerificationCode> {
   @override
   void initState() {
     super.initState();
-    startCountdown(); 
+    startCountdown();
   }
 
   @override
   void dispose() {
-    timer.cancel(); 
+    timer.cancel();
     for (var nodes in focusNodes) {
       nodes.dispose();
-    };
+    }
+    ;
     super.dispose();
   }
 
   void startCountdown() {
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       if (countdown > 0) {
         setState(() {
           countdown--;
         });
       } else {
-        t.cancel(); 
+        t.cancel();
       }
     });
   }
@@ -69,9 +69,10 @@ class _VerificationCodeState extends State<VerificationCode> {
               arguments: email,
             );
           } else if (state is VerficationFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
           } else if (state is VerficationLoading) {
-            Center(child: CircularProgressIndicator());
+            const Center(child: CircularProgressIndicator());
           }
         },
         builder: (context, state) {
@@ -80,13 +81,15 @@ class _VerificationCodeState extends State<VerificationCode> {
             child: Scaffold(
               resizeToAvoidBottomInset: false,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              appBar: CustomAppBar(title: ""),
+              appBar: const CustomAppBar(title: ""),
               body: Column(
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.05,  // Dynamic padding
-                      vertical: MediaQuery.of(context).size.height * 0.05,  // Dynamic vertical padding
+                      horizontal: MediaQuery.of(context).size.width *
+                          0.05, // Dynamic padding
+                      vertical: MediaQuery.of(context).size.height *
+                          0.05, // Dynamic vertical padding
                     ),
                     child: Form(
                       key: key,
@@ -97,23 +100,29 @@ class _VerificationCodeState extends State<VerificationCode> {
                             "Verification Code",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: MediaQuery.of(context).size.width * 0.08, // Dynamic font size
+                              fontSize: MediaQuery.of(context).size.width *
+                                  0.08, // Dynamic font size
                             ),
                           ),
-                          const Image(image: AssetImage("assets/images/IMG.png")),
+                          const Image(
+                              image: AssetImage("assets/images/IMG.png")),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(4, (index) {
                               return Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5.0),
                                 child: SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.12, // Dynamic width for each input box
+                                  width: MediaQuery.of(context).size.width *
+                                      0.12, // Dynamic width for each input box
                                   child: TextField(
-                                    onChanged: (val){
-                                      if(val.isNotEmpty && index < 3){
-                                        FocusScope.of(context).requestFocus(focusNodes[index + 1]);
-                                      } else if (val.isEmpty && index > 0){
-                                        FocusScope.of(context).requestFocus(focusNodes[index - 1]);
+                                    onChanged: (val) {
+                                      if (val.isNotEmpty && index < 3) {
+                                        FocusScope.of(context).requestFocus(
+                                            focusNodes[index + 1]);
+                                      } else if (val.isEmpty && index > 0) {
+                                        FocusScope.of(context).requestFocus(
+                                            focusNodes[index - 1]);
                                       }
                                     },
                                     controller: controllers[index],
@@ -133,32 +142,37 @@ class _VerificationCodeState extends State<VerificationCode> {
                             }),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05), // Dynamic spacing
+                            padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height *
+                                    0.05), // Dynamic spacing
                             child: Text(
                               countdown > 0
                                   ? "$countdown seconds remaining to resend code."
                                   : "Resend confirmation code.",
                               style: TextStyle(
                                 color: Colors.grey,
-                                fontSize: MediaQuery.of(context).size.width * 0.04, // Dynamic font size
+                                fontSize: MediaQuery.of(context).size.width *
+                                    0.04, // Dynamic font size
                               ),
                             ),
                           ),
-                         
                         ],
                       ),
                     ),
                   ),
-                  Spacer(),
-                 CustomContainer(
-                        text: "Confirm Code",
-                        onTap: () async {
-                          code = controllers.map((controller) => controller.text).join();
-                          if (code.length == 4) {
-                            BlocProvider.of<VerficationCubit>(context).Verfy(email: email, code: code);
-                          }
-                        },
-                      ),
+                  const Spacer(),
+                  CustomContainer(
+                    text: "Confirm Code",
+                    onTap: () async {
+                      code = controllers
+                          .map((controller) => controller.text)
+                          .join();
+                      if (code.length == 4) {
+                        BlocProvider.of<VerficationCubit>(context)
+                            .Verfy(email: email, code: code);
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
@@ -168,5 +182,3 @@ class _VerificationCodeState extends State<VerificationCode> {
     );
   }
 }
-
-
