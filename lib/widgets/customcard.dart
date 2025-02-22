@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lazashopping/screens/started_screen.dart';
+import 'package:lazashopping/view/screens/started_screen.dart';
 import 'package:lazashopping/widgets/custombutton.dart';
 
 class Customcard extends StatefulWidget {

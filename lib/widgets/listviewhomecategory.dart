@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lazashopping/model/Categorymodel/categoryModel.dart';
-import 'package:lazashopping/screens/Category/categoryhome.dart';
+import 'package:lazashopping/view/screens/Category/categoryhome.dart';
 import 'package:lazashopping/widgets/customhomecategory.dart';
 
 class ListViewHomeCategory extends StatelessWidget {

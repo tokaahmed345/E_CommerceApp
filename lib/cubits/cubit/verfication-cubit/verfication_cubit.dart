@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:lazashopping/model/AuthModel/verfication.dart';
-import 'package:lazashopping/screens/Auth/verification%20_code.dart';
+import 'package:lazashopping/view/screens/Auth/verification%20_code.dart';
 import 'package:lazashopping/services/AuthServices/verficationservices.dart';
 import 'package:meta/meta.dart';
 

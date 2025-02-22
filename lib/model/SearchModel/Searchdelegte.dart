@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:lazashopping/model/ProductModel/product.dart';
 import 'package:lazashopping/model/SearchModel/searchmodel.dart';
-import 'package:lazashopping/screens/detailsproduct.dart/info_screen.dart';
 import 'package:lazashopping/services/searchServuces/searchservcies.dart';
+import 'package:lazashopping/view/screens/DetailsProduct.dart/info_screen.dart';
 
 class SearchScrean extends SearchDelegate {
   SearchScrean({required this.searchServces});

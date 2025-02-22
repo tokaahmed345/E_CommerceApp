@@ -48,16 +48,16 @@ class PaymentAuthServices {
           data: {
             "auth_token": authToken,
             "delivery_needed": false,
-            "amount_cents": (amount * 100).toInt(), // ✅ تأكد أنه int
+            "amount_cents": (amount * 100).toInt(), 
             "currency": "USD",
             "merchant_order_id": generateUniqueOrderId(),
             "items": []
           });
 
       if (response.statusCode == 201 && response.data != null) {
-        order_id = response.data["id"]; // ✅ استرجاعه كـ int بدون تحويل
+        order_id = response.data["id"]; 
         print("✅ Order ID: $order_id");
-        return order_id; // ✅ إرجاعه كـ int بدون تحويل
+        return order_id; 
       } else {
         print("⚠️ فشل في جلب Order ID: ${response.data}");
         return null;
