@@ -92,7 +92,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            CustomFutureHomeProduct()
+            Expanded(child: CustomFutureHomeProduct())
           ],
         ),
       ),

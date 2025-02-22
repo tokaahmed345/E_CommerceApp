@@ -22,25 +22,23 @@ class CustomGridView extends StatelessWidget {
     double mainAxisSpacing = screenWidth * 0.02; // Reduced to 2% of screen width
     double childAspectRatio = screenWidth > 600 ? 0.8 : 0.5; // Adjusted ratio for better fit
 
-    return Expanded(
-      child: GridView.builder(
-        
-        itemCount: products.length,
-        shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(8.0), // Add padding around the grid
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          crossAxisSpacing: crossAxisSpacing,
-          mainAxisSpacing: mainAxisSpacing,
-          childAspectRatio: childAspectRatio,
-        ),
-        itemBuilder: (context, index) {
-          return CustomCardContent(
-            
-            pro: products[index],);
-        },
+    return GridView.builder(
+      
+      itemCount: products.length,
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.all(8.0), // Add padding around the grid
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        crossAxisSpacing: crossAxisSpacing,
+        mainAxisSpacing: mainAxisSpacing,
+        childAspectRatio: childAspectRatio,
       ),
+      itemBuilder: (context, index) {
+        return CustomCardContent(
+          
+          pro: products[index],);
+      },
     );
   }
 }
