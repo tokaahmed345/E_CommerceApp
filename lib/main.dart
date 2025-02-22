@@ -18,8 +18,8 @@ import 'package:lazashopping/screens/Auth/signup.dart';
 import 'package:lazashopping/screens/drawersScreens/account_Info.dart';
 import 'package:lazashopping/screens/drawersScreens/display_Password.dart';
 import 'package:lazashopping/screens/orderconfirmed/orderconfirmed.dart';
-import 'package:lazashopping/screens/paymentscreen/addnewcard.dart';
-import 'package:lazashopping/screens/paymentscreen/payment.dart';
+import 'package:lazashopping/screens/paymentscreen/pay_details.dart';
+import 'package:lazashopping/screens/paymentscreen/web_view.dart';
 import 'package:lazashopping/screens/welcomescreen.dart';
 import 'package:lazashopping/screens/Auth/newpassword.dart';
 import 'package:lazashopping/screens/splash/splash.dart';
@@ -28,6 +28,7 @@ import 'package:lazashopping/screens/Auth/verification%20_code.dart';
 import 'package:lazashopping/screens/wishlist/wishlist.dart';
 import 'package:lazashopping/sharedpref/sharedprefrance.dart';
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.init();
   await Firebase.initializeApp(
@@ -36,9 +37,12 @@ void main() async {
   runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {
+  
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+
+
     return BlocProvider(
       create: (context) => ThemeCubit(),
       child: BlocBuilder<ThemeCubit, ThemeMode>(
@@ -65,13 +69,13 @@ class MyApp extends StatelessWidget {
               AddReviewScreen.id: (context) => AddReviewScreen(),
               CartView.id: (context) => CartView(),
               AddressScreen.id: (context) => AddressScreen(),
-              PaymentScreen.id: (context) => PaymentScreen(),
-              AddNewCard.id: (context) => AddNewCard(),
               OrderConfirmedScreen.id: (context) => OrderConfirmedScreen(),
               WishListScreen.id: (context) => WishListScreen(),
               GetOrders.id: (context) => GetOrders(),
               DisplayPasswordScreen.id:(context)=>DisplayPasswordScreen(),
-              AccountInfoScreen.id:(context)=>AccountInfoScreen()
+              AccountInfoScreen.id:(context)=>AccountInfoScreen(),
+              PayMobIFrameScreen.id:(context)=>PayMobIFrameScreen(),
+              DetailsPayment.id:(context)=>DetailsPayment()
             },
             initialRoute:
                  //SplashScreen.id

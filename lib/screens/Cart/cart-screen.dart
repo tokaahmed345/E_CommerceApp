@@ -11,7 +11,8 @@ import 'package:lazashopping/screens/Cart/customwidget/custompaymentlisttile.dar
 import 'package:lazashopping/screens/Cart/customwidget/customtitlecard.dart';
 import 'package:lazashopping/screens/Cart/customwidget/summaryorder.dart';
 import 'package:lazashopping/screens/orderconfirmed/orderconfirmed.dart';
-import 'package:lazashopping/screens/paymentscreen/payment.dart';
+import 'package:lazashopping/screens/paymentscreen/pay_details.dart';
+import 'package:lazashopping/screens/paymentscreen/web_view.dart';
 import 'package:lazashopping/services/cartServices/getallservices.dart';
 import 'package:lazashopping/sharedpref/sharedprefrance.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
@@ -69,6 +70,8 @@ class CartView extends StatelessWidget {
                                 ),
                               );
                             } else if (state is GetAllItemInCartSuccess) {
+                               BlocProvider.of<CalculateTotalCubit>(context)
+      .updateTotal(state.getAllItems["Items"]);
                               List<dynamic> items =
                                   state.getAllItems["Items"] ?? [];
 
@@ -125,13 +128,10 @@ class CartView extends StatelessWidget {
                                   ),
                                   SizedBox(height: screenHeight * 0.02),
                                   const CustomTitleCard(
-                                      title: "Payment Methods"),
+                                      title: "Payment Method"),
                                   CustomListtileCard(
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, PaymentScreen.id);
-                                    },
-                                    title: "Visa Classic",
+                                  
+                                    title: "Pay With Visa ",
                                     subTitle: "**** 7690",
                                     image: "assets/images/Frame.png",
                                   ),
@@ -161,8 +161,18 @@ class CartView extends StatelessWidget {
                             if (currentState is GetAllItemInCartSuccess &&
                                 currentState.getAllItems["Items"] != null &&
                                 currentState.getAllItems["Items"].isNotEmpty) {
-                              Navigator.pushNamed(
-                                  context, OrderConfirmedScreen.id);
+                            
+                              final totalState = BlocProvider.of<CalculateTotalCubit>(context).state;
+if (totalState is CalculateTotalSuccess) {
+  Navigator.pushNamed(
+    context,
+    DetailsPayment.id,
+    arguments: totalState.total, // الآن نحصل على total بشكل صحيح
+  );
+} else {
+  Helpers.showSnackbar(context, "Failed to calculate total",
+      backgroundColor: const Color.fromARGB(255, 231, 85, 209));
+}
                             } else {
                               Helpers.showSnackbar(context, "No Item Found",
                                   backgroundColor:

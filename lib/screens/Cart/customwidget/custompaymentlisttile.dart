@@ -6,12 +6,12 @@ class CustomListtileCard extends StatelessWidget {
     required this.image,
     required this.subTitle,
     required this.title,
-    required this.onTap,
+     this.onTap,
   });
   final String image;
   final String subTitle;
   final String title;
-  final void Function() onTap;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
