@@ -5,12 +5,15 @@ import 'package:lazashopping/view/screens/Cart/customwidget/customAppbar.dart';
 import 'package:lazashopping/view/screens/paymentscreen/web_view.dart';
 import 'package:lazashopping/widgets/customcontainer.dart';
 import 'package:lazashopping/view/screens/Cart/customwidget/customadresstextfield.dart';
+
 class DetailsPayment extends StatefulWidget {
   static String id = "DetailsPayment";
   const DetailsPayment({super.key});
+
   @override
   State<DetailsPayment> createState() => _DetailsPaymentState();
 }
+
 class _DetailsPaymentState extends State<DetailsPayment> {
   final TextEditingController fNameController = TextEditingController();
   final TextEditingController lNameController = TextEditingController();
@@ -18,6 +21,7 @@ class _DetailsPaymentState extends State<DetailsPayment> {
   final TextEditingController emailController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   double totalOrder = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +34,7 @@ class _DetailsPaymentState extends State<DetailsPayment> {
       }
     });
   }
+
   @override
   void dispose() {
     fNameController.dispose();
@@ -38,6 +43,7 @@ class _DetailsPaymentState extends State<DetailsPayment> {
     emailController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -74,7 +80,7 @@ class _DetailsPaymentState extends State<DetailsPayment> {
         },
         child: Builder(builder: (context) {
           return Scaffold(
-            appBar: CustomAppBar(title: "payment Details"),
+            appBar: CustomAppBar(title: "Payment Details"),
             resizeToAvoidBottomInset: false,
             body: Column(
               children: [

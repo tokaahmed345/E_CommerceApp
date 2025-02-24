@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
               DisplayPasswordScreen.id:(context)=>DisplayPasswordScreen(),
               AccountInfoScreen.id:(context)=>AccountInfoScreen(),
               PayMobIFrameScreen.id:(context)=>PayMobIFrameScreen(),
-              DetailsPayment.id:(context)=>DetailsPayment()
+            DetailsPayment.id:(context)=>DetailsPayment()
             },
             initialRoute:
                  //SplashScreen.id

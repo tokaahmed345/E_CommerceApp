@@ -48,8 +48,10 @@ class WishListScreen extends StatelessWidget {
                       CustomInfoWishlist(
                         wishlist: result,
                       ),
-                      CustomGridView(
-                        products: result.map((e) => e.toProduct()).toList(),
+                      Expanded(
+                        child: CustomGridView(
+                          products: result.map((e) => e.toProduct()).toList(),
+                        ),
                       ),
                     ],
                   );

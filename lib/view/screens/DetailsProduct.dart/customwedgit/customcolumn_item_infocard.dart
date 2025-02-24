@@ -49,7 +49,7 @@ class CustomColumninfoCard extends StatelessWidget {
 
                 Navigator.pushNamed(context, CartView.id);
               } else {
-                Helpers.showSnackbar(context, "Item already exist",
+                Helpers.showSnackbar(context, "Item added Successfully ",
                     backgroundColor: const Color.fromARGB(255, 231, 85, 209));
                 Navigator.pushNamed(context, CartView.id);
               }

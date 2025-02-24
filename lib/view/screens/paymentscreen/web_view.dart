@@ -13,9 +13,10 @@ class PayMobIFrameScreen extends StatefulWidget {
 }
 
 class _PayMobIFrameScreenState extends State<PayMobIFrameScreen> {
-  late WebViewController? _controller;
+  late WebViewController _controller;
   bool isLoading = true;
   String? paymentUrl;
+  String? lastLoadedUrl; // لتجنب إعادة تحميل نفس الصفحة
 
   @override
   void initState() {
@@ -24,9 +25,14 @@ class _PayMobIFrameScreenState extends State<PayMobIFrameScreen> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
+          onWebResourceError: (WebResourceError error) {
+            print("❌ WebView Error: ${error.errorCode} - ${error.description}");
+          },
           onPageStarted: (url) {
+            if (lastLoadedUrl == url) return; // تجنب إعادة تحميل نفس الصفحة
             setState(() {
               isLoading = true;
+              lastLoadedUrl = url; // حفظ آخر رابط تم تحميله
             });
           },
           onPageFinished: (url) async {
@@ -34,14 +40,19 @@ class _PayMobIFrameScreenState extends State<PayMobIFrameScreen> {
               isLoading = false;
             });
 
-            String pageContent = (await _controller!
+            // 🔹 قراءة محتوى الصفحة لعرضه في الـ console
+            String pageContent = (await _controller
                     .runJavaScriptReturningResult("document.body.innerText"))
                 .toString();
+            print("🔍 Page Content: $pageContent");
 
-            if (pageContent.contains("Approved")) {
+            // 🔹 التحقق مما إذا كان الدفع ناجحًا
+            if (pageContent.contains("Approved") || pageContent.contains("Success")) {
               await Future.delayed(const Duration(seconds: 1));
-              Navigator.pushNamed(context, OrderConfirmedScreen.id);
-              SharedPref.clearAddress();
+              if (mounted) {
+                Navigator.pushNamed(context, OrderConfirmedScreen.id);
+                SharedPref.clearAddress();
+              }
             }
           },
         ),
@@ -54,10 +65,13 @@ class _PayMobIFrameScreenState extends State<PayMobIFrameScreen> {
 
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    paymentUrl = args?['paymentUrl'];
 
-    if (paymentUrl != null) {
-      _controller!.loadRequest(Uri.parse(paymentUrl!));
+    if (args != null && args.containsKey('paymentUrl')) {
+      paymentUrl = args['paymentUrl'];
+
+      if (paymentUrl != null && paymentUrl != lastLoadedUrl) {
+        _controller.loadRequest(Uri.parse(paymentUrl!));
+      }
     }
   }
 
@@ -70,16 +84,16 @@ class _PayMobIFrameScreenState extends State<PayMobIFrameScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          if (paymentUrl != null && _controller != null)
+          if (paymentUrl != null)
             SizedBox(
               width: screenWidth,
               height: screenHeight, // الويب فيو يأخذ كامل الشاشة
-              child: WebViewWidget(controller: _controller!),
+              child: WebViewWidget(controller: _controller),
             )
           else
             Center(
               child: Text(
-                "Error: No payment URL provided",
+                "⚠️ Error: No payment URL provided",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: screenWidth * 0.05, // حجم النص كنسبة من العرض

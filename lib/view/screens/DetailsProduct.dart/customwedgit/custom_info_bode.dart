@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart'; // لاستعمال TapGestureRecognizer
+import 'package:flutter/gestures.dart'; 
 import 'package:lazashopping/model/ProductDetails/iteminfo.dart';
 import 'package:lazashopping/view/screens/AllReview/reviewsscreen.dart';
 import 'package:lazashopping/widgets/custom-item-shape.dart';
