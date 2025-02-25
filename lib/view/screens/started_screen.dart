@@ -81,22 +81,22 @@ class _StartedScreenState extends State<StartedScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6.0, horizontal: 10),
-                    child: CustomRec_Button(
-                      onTap: () {
-                        signInWithFacebook().then((UserCredential) {
-                          Navigator.pushNamed(context, HomeScreen.id);
-                        }).catchError((e) {
-                          print("Error signing in with facebook: $e");
-                        });
-                      },
-                      text: "FaceBook",
-                      icon: Icons.facebook,
-                      background: const Color(0xff4267b2),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(
+                  //       vertical: 6.0, horizontal: 10),
+                  //   child: CustomRec_Button(
+                  //     onTap: () {
+                  //       signInWithFacebook().then((UserCredential) {
+                  //         Navigator.pushNamed(context, HomeScreen.id);
+                  //       }).catchError((e) {
+                  //         print("Error signing in with facebook: $e");
+                  //       });
+                  //     },
+                  //     text: "FaceBook",
+                  //     icon: Icons.facebook,
+                  //     background: const Color(0xff4267b2),
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 6.0, horizontal: 10),
@@ -125,7 +125,7 @@ class _StartedScreenState extends State<StartedScreen> {
                 ],
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.33),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.39),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, LoginScreen.id);
