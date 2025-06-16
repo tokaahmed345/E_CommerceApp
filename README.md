@@ -1,16 +1,30 @@
 # lazashopping
 
-A new Flutter project.
+Laza Commerce is a modern e-commerce platform designed to provide a seamless shopping experience for users. The platform supports product browsing, searching, detailed product pages, user authentication, cart management, and secure checkout.
 
-## Getting Started
+Built with scalability and performance in mind, Laza Commerce integrates with APIs to manage inventory, orders, and user data effectively.
 
-This project is a starting point for a Flutter application.
+Features
+User registration and login with authentication
 
-A few resources to get you started if this is your first Flutter project:
+Product catalog with categories and search functionality
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Shopping cart and order management
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Responsive UI for both web and mobile
+
+Integration with payment gateways for secure transactions
+
+Admin panel for managing products, orders, and users
+
+Technologies Used
+Flutter
+
+RESTful APIs
+
+Firebase 
+
+State management (Cubit)
+
+Cloud storage and databases
+
