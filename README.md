@@ -1,6 +1,6 @@
 # laza shopping
 
-Laza Commerce is a modern e-commerce platform designed to provide a seamless shopping experience for users. The platform supports product browsing, searching, detailed product pages, user authentication, cart management, and secure checkout.
+Laza E_Commerce is a modern e-commerce platform designed to provide a seamless shopping experience for users. The platform supports product browsing, searching, detailed product pages, user authentication, cart management, and secure checkout.
 
 Built with scalability and performance in mind, Laza Commerce integrates with APIs to manage inventory, orders, and user data effectively.
 
